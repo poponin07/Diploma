@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class 123 : MonoBehaviour
+public class MinoinMoveController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
