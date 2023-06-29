@@ -1,38 +1,45 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TowerDefense;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MinoinMoveController : MonoBehaviour
 {
-    private float speed;
-    [SerializeField] private List<GameObject> points = new List<GameObject>();
-    private GameObject target;
+    [SerializeField] private List<Transform> m_points = new List<Transform>(); 
+    private BaseMinion data;
+    private Transform target;
     private int indx;
+    private NavMeshAgent m_agent;
 
     private void Start()
     {
+        data = GetComponent<BaseMinion>();
+        m_agent = GetComponent<NavMeshAgent>();
         indx = 0;
-        target = points[indx];
-        speed = 3f;
+        target = m_points[indx];
+        m_agent.SetDestination(target.position);
     }
 
     private void FixedUpdate()
     {
-        if (indx == points.Count)
+        if (m_agent.remainingDistance <= m_agent.stoppingDistance)
+        {
+            SetTarget();
+            m_agent.SetDestination(target.position);
+        }
+    }
+
+    //выбор новой точки для следования
+    private void SetTarget()
+    {
+        indx++;
+        if (indx > m_points.Count - 1)
         {
             return;
         }
-        target = points[indx];
-        if (Vector3.Distance(transform.position, target.transform.position) >= 0.5f)
-        {
-            transform.LookAt(target.transform);
-            transform.Translate(Vector3.forward * (speed * Time.deltaTime));
-        }
-        else
-        {
-            indx++;
-            
-        }
+
+        target = m_points[indx];
     }
 }
