@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TowerDefense;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MinoinMoveController : MonoBehaviour
 {
@@ -10,18 +11,24 @@ public class MinoinMoveController : MonoBehaviour
     private BaseMinion data;
     private Transform target;
     private int indx;
-
+    private NavMeshAgent m_agent;
 
     private void Start()
     {
         data = GetComponent<BaseMinion>();
+        m_agent = GetComponent<NavMeshAgent>();
         indx = 0;
         target = m_points[indx];
+        m_agent.SetDestination(target.position);
     }
 
     private void FixedUpdate()
     {
-        
+        if (m_agent.remainingDistance <= m_agent.stoppingDistance)
+        {
+            SetTarget();
+            m_agent.SetDestination(target.position);
+        }
     }
 
     //выбор новой точки для следования
