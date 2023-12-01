@@ -12,6 +12,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enums.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/030353032b914045a0b96bea329b98d3c000/b2/7d56f62b/NavMeshAgent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Minions/MinoinMoveController.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -76,6 +77,7 @@
       <workItem from="1690915963310" duration="1210000" />
       <workItem from="1700159522250" duration="3000" />
       <workItem from="1701444203173" duration="287000" />
+      <workItem from="1701445767849" duration="1464000" />
     </task>
     <servers />
   </component>

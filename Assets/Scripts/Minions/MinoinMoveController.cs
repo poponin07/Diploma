@@ -9,11 +9,11 @@ public class MinoinMoveController : MonoBehaviour
 {
     [SerializeField] private List<Transform> m_points = new List<Transform>(); 
     private BaseMinion data;
-    private Transform target;
+   [SerializeField] private Transform target;
     private int indx;
     private NavMeshAgent m_agent;
 
-    private void Start()
+    private void Awake()
     {
         data = GetComponent<BaseMinion>();
         m_agent = GetComponent<NavMeshAgent>();
@@ -22,9 +22,9 @@ public class MinoinMoveController : MonoBehaviour
         m_agent.SetDestination(target.position);
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        if (m_agent.remainingDistance <= m_agent.stoppingDistance)
+        if (m_agent.remainingDistance < m_agent.stoppingDistance)
         {
             SetTarget();
             m_agent.SetDestination(target.position);
@@ -35,6 +35,7 @@ public class MinoinMoveController : MonoBehaviour
     private void SetTarget()
     {
         indx++;
+        
         if (indx > m_points.Count - 1)
         {
             return;
