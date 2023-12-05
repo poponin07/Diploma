@@ -16,10 +16,6 @@ public class MinionSpawner : MonoBehaviour
       SpawnEnemy();
    }
 
-   private void Update()
-   {
-          
-       }
 
    public void SpawnEnemy()
    {
