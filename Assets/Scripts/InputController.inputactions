@@ -1,0 +1,54 @@
+{
+    "name": "InputController",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "b1433ea8-b2af-4ac7-8abf-23fa8ee56869",
+            "actions": [
+                {
+                    "name": "CursorPositiion",
+                    "type": "Value",
+                    "id": "9b50c661-8016-47c2-8120-5f4fbfa57095",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ClickForReycast",
+                    "type": "Button",
+                    "id": "4d1a130f-9919-471c-b164-0a7fbaf9ec69",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6f973a7b-a98d-41d5-a3d5-ca511f03a494",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CursorPositiion",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15eacbae-6416-4af0-9c7b-1c91046e9f1e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ClickForReycast",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
