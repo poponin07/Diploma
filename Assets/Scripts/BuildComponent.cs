@@ -25,7 +25,7 @@ namespace TowerDefense
 
         private void OnRayCastPlayer()
         {
-            
+            Debug.Log("Zomby");
             Camera _camera = Camera.main;
             ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
