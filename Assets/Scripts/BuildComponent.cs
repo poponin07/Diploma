@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -11,11 +12,12 @@ namespace TowerDefense
     {
         private InputController _input;
         private Ray ray;
+        public GameObject tower_1;
 
-        private void Awake()
+private void Awake()
         {
             _input = new InputController();
-            Debug.Log("Click");
+            _input.Enable();
         }
 
         private void Start()
@@ -23,9 +25,13 @@ namespace TowerDefense
             _input.Player.ClickForReycast.canceled += context =>  OnRayCastPlayer();
         }
 
+        private void Update()
+        {
+            
+        }
+
         private void OnRayCastPlayer()
         {
-            Debug.Log("Zomby");
             Camera _camera = Camera.main;
             ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
@@ -38,5 +44,15 @@ namespace TowerDefense
             }
         }
 
+        IEnumerator TowerMagnetToCursor()
+        {
+            while(true)
+            {
+                GameObject towerB = Instantiate(tower_1, new Vector3(55, 5, 5), Quaternion.identity);
+                towerB.transform.position = 
+            yield return null;
+            }
+            
+        }
     }
 }
