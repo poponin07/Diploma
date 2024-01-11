@@ -13,11 +13,14 @@ namespace TowerDefense
         private InputController _input;
         private Ray ray;
         public GameObject tower_1;
+        private Plane plane = new Plane(Vector3.up, 0);
+        public bool isBuild;
 
 private void Awake()
         {
             _input = new InputController();
             _input.Enable();
+            isBuild = true;
         }
 
         private void Start()
@@ -25,11 +28,16 @@ private void Awake()
             _input.Player.ClickForReycast.canceled += context =>  OnRayCastPlayer();
         }
 
-        private void Update()
+        public void SetMayBuild(bool result)
         {
-            
+            isBuild = result;
         }
 
+        public void StartBuild()
+        {
+            StartCoroutine(TowerMagnetToCursor());
+        }
+        
         private void OnRayCastPlayer()
         {
             Camera _camera = Camera.main;
@@ -46,10 +54,27 @@ private void Awake()
 
         IEnumerator TowerMagnetToCursor()
         {
+            Camera _camera = Camera.main;
+            GameObject towerB = Instantiate(tower_1, new Vector3(55, 5, 5), Quaternion.identity);
+            BuildAgent buildAgent = towerB.GetComponent<BuildAgent>();
+            buildAgent.Initialization(this);
+            
             while(true)
             {
-                GameObject towerB = Instantiate(tower_1, new Vector3(55, 5, 5), Quaternion.identity);
-                towerB.transform.position = 
+                ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+                if (plane.Raycast(ray, out float distance))
+                {
+                    towerB.transform.position = ray.GetPoint(distance);
+
+                    if (Input.GetKeyDown(KeyCode.Mouse0) && isBuild)
+                    {
+                        buildAgent.enabled = false;
+                        buildAgent.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                        break;
+                    }
+                }
+                
             yield return null;
             }
             
