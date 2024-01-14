@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TowerDefense
 {
-    public class SpawnCmponent : MonoBehaviour
+    public class SpawnComponent : MonoBehaviour
     {
        [SerializeField]private Transform m_spawnPointTransform;
         private float m_spawnOffset;
@@ -17,7 +17,7 @@ namespace TowerDefense
         private void Start()
         {
             m_path = path.GetComponentsInChildren<Transform>();
-            
+            m_poolComponent = GetComponent<PoolComponent>();
             m_spawnOffset = 2f;
             StartCoroutine(SpawnCor());
         }
@@ -26,7 +26,7 @@ namespace TowerDefense
         {
             while (true)
             {
-                yield return new WaitForSeconds(m_spawnOffset);
+                 yield return new WaitForSeconds(m_spawnOffset);
                 //var min = Instantiate(m_zombPrefab, m_spawnPointTransform);
                 var min = m_poolComponent.SetMinion(m_zombPrefab ,m_spawnPointTransform);
                 min.GetComponent<MinoinMoveController>().m_points = m_path;

@@ -7,10 +7,11 @@ namespace TowerDefense
 {
     public class Killer : MonoBehaviour
     {
+        [SerializeField] private PoolComponent m_poolComponent;
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(1);
-            Destroy(other.gameObject);
+            MinionComponent minion = other.GetComponent<MinionComponent>();
+         m_poolComponent.DisableMinion(minion);
         }
         
     }
