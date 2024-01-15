@@ -12,8 +12,8 @@ public class PoolComponent : MonoBehaviour
 [SerializeField]private Transform m_poolPosition;
 [SerializeField] private GameObject m_zombi;
 
-[SerializeField] private List<MinionComponent> m_AllMinions;
-[SerializeField] private List<MinionComponent> m_ZombiMinions;
+[SerializeField] private List<BaseMinion> m_AllMinions;
+[SerializeField] private List<BaseMinion> m_ZombiMinions;
 private Transform m_spaunPoint;
 
 public GameObject SetMinion(GameObject minion, Transform point)
@@ -24,7 +24,7 @@ public GameObject SetMinion(GameObject minion, Transform point)
  return min;
 }
 
-public void DisableMinion(MinionComponent minion)
+public void DisableMinion(BaseMinion minion)
 {
 minion.gameObject.SetActive(false);
 m_AllMinions.Remove(minion);
@@ -35,14 +35,14 @@ minion.transform.position = m_poolPosition.position;
 public GameObject AddMinion(GameObject minion)
 {
 var min = Instantiate(minion, m_spaunPoint.position, Quaternion.identity);
-m_AllMinions.Add(minion.GetComponent<MinionComponent>());
+m_AllMinions.Add(minion.GetComponent<BaseMinion>());
 
 return min;
 }
 
 public GameObject GetFreeMinion(GameObject minion)
 {
-MinionComponent minionComponent = minion.GetComponent<MinionComponent>();
+    BaseMinion minionComponent = minion.GetComponent<BaseMinion>();
 
 foreach(var obj in m_ZombiMinions) 
 {

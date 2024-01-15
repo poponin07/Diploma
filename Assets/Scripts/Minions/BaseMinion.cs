@@ -6,9 +6,9 @@ namespace TowerDefense
 {
     public class BaseMinion : MonoBehaviour
     {
-        [SerializeField] private int m_health;
-        [SerializeField] private int m_speed;
-        [SerializeField] private ElementType m_type;
+        [SerializeField] public int m_health;
+        [SerializeField] public int m_speed;
+        [SerializeField] public ElementType m_type;
 
         public int Health
         {

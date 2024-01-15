@@ -29,8 +29,7 @@ namespace TowerDefense
         {
             while (true)
             {
-                 yield return new WaitForSeconds(m_spawnOffset);
-                //var min = Instantiate(m_zombPrefab, m_spawnPointTransform);
+                yield return new WaitForSeconds(m_spawnOffset);
                 GameObject min = m_poolComponent.SetMinion(m_zombPrefab, m_spawnPointTransform);
                 MinoinMoveController RemovedComponent = min.GetComponent<MinoinMoveController>();
                 RemovedComponent.SetTarget(true);
