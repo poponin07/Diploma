@@ -9,7 +9,7 @@ namespace TowerDefense
 {
     public class MinoinMoveController : MonoBehaviour
     {
-        public Transform[] m_points = new Transform[]{};
+        public List<Transform> m_points;
         private BaseMinion data;
         [SerializeField] private Transform target;
         private int indx;
@@ -20,7 +20,6 @@ namespace TowerDefense
         {
             data = GetComponent<BaseMinion>();
             m_agent = GetComponent<NavMeshAgent>();
-           
         }
 
         private void Start()
@@ -30,25 +29,31 @@ namespace TowerDefense
             m_agent.SetDestination(target.position);
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             if (m_agent.remainingDistance < m_agent.stoppingDistance)
             {
-                SetTarget();
+                SetTarget(false);
                 m_agent.SetDestination(target.position);
             }
         }
 
         //выбор новой точки для следования
-        private void SetTarget()
+        public void SetTarget(bool startPoint)
         {
-            indx++;
-
-            if (indx > m_points.Length - 1)
+            if (startPoint)
             {
+                target = m_points[0];
+                indx = 0;
                 return;
             }
 
+            if (indx > m_points.Count - 1)
+            {
+                return;
+            }
+            
+            indx++;
             target = m_points[indx];
         }
     }
