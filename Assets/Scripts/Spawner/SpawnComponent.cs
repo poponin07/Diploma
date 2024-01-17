@@ -14,14 +14,18 @@ namespace TowerDefense
         [SerializeField] private Transform path;
        [SerializeField] private List<Transform> m_path;
        [SerializeField] private PoolComponent m_poolComponent;
-
+        private int m_zombiGainCount = 3;
+        private int m_CurZombiCount; 
         private void Start()
         {
             var myArray= path.GetComponentsInChildren<Transform>();
             m_path = myArray.ToList();
             m_path.Remove(m_path[0]);
+
             m_poolComponent = GetComponent<PoolComponent>();
+
             m_spawnOffset = 2f;
+            
             StartCoroutine(SpawnCor());
         }
 
@@ -37,5 +41,9 @@ namespace TowerDefense
             }
         }
         
+    }
+    public class Wave : MonoBehaviour
+    {
+        public BaseMinion[] minions;
     }
 }

@@ -7,8 +7,7 @@ namespace TowerDefense
 {
     public class ZombiComponent : BaseMinion
     {
-        private 
-        public void Initialization(Transform[] path)
+        public void Initialization()
         {
             
         }
