@@ -5,56 +5,48 @@ using TowerDefense;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace TowerDefense
+public class MinoinMoveController : MonoBehaviour
 {
-    public class MinoinMoveController : MonoBehaviour
+    [SerializeField] public List<Transform> m_points = new List<Transform>(); 
+    private BaseMinion data;
+    private Transform target;
+    private int indx;
+    private NavMeshAgent m_agent;
+
+    private void Start()
     {
-        public List<Transform> m_points;
-        private BaseMinion data;
-        [SerializeField] private Transform target;
-        private int indx;
-        private NavMeshAgent m_agent;
+        data = GetComponent<BaseMinion>();
+        m_agent = GetComponent<NavMeshAgent>();
+        indx = 0;
+        target = m_points[indx];
+        m_agent.SetDestination(target.position);
+    }
+    
+    
 
-
-        private void Awake()
+    private void FixedUpdate()
+    {
+        if (m_agent.remainingDistance <= m_agent.stoppingDistance)
         {
-            data = GetComponent<BaseMinion>();
-            m_agent = GetComponent<NavMeshAgent>();
-        }
-
-        private void Start()
-        {
-            indx = 0;
-            target = m_points[indx];
+            SetTarget();
             m_agent.SetDestination(target.position);
         }
+    }
 
-        private void FixedUpdate()
+    public void SetRunIndex(int inx)
+    {
+        indx = -1;
+    }
+
+    //выбор новой точки для следования
+    public void SetTarget()
+    {
+        indx++;
+        if (indx > m_points.Count - 1)
         {
-            if (m_agent.remainingDistance < m_agent.stoppingDistance)
-            {
-                SetTarget(false);
-                m_agent.SetDestination(target.position);
-            }
+            return;
         }
 
-        //выбор новой точки для следования
-        public void SetTarget(bool startPoint)
-        {
-            if (startPoint)
-            {
-                target = m_points[0];
-                indx = 0;
-                return;
-            }
-
-            if (indx > m_points.Count - 1)
-            {
-                return;
-            }
-            
-            indx++;
-            target = m_points[indx];
-        }
+        target = m_points[indx];
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Debug = UnityEngine.Debug;
@@ -71,6 +72,7 @@ private void Awake()
                     {
                         buildAgent.enabled = false;
                         buildAgent.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                        buildAgent.AfterBuildTodtr();
                         break;
                     }
                 }

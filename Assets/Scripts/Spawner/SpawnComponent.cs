@@ -36,7 +36,8 @@ namespace TowerDefense
                 yield return new WaitForSeconds(m_spawnOffset);
                 GameObject min = m_poolComponent.SetMinion(m_zombPrefab, m_spawnPointTransform);
                 MinoinMoveController RemovedComponent = min.GetComponent<MinoinMoveController>();
-                RemovedComponent.SetTarget(true);
+                RemovedComponent.SetTarget();
+                RemovedComponent.SetRunIndex(-1);
                 RemovedComponent.m_points = m_path;
             }
         }

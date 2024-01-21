@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
+using Quaternion = UnityEngine.Quaternion;
 
 namespace TowerDefense
 {
@@ -17,40 +18,39 @@ public class PoolComponent : MonoBehaviour
 private Transform m_spaunPoint;
 
 public GameObject SetMinion(GameObject minion, Transform point)
-{ 
-    m_spaunPoint = point;
-    Debug.Log("Set");
+{
+m_spaunPoint = point.transform;
  var min = GetFreeMinion(minion);
  return min;
 }
 
 public void DisableMinion(BaseMinion minion)
 {
-minion.gameObject.SetActive(false);
-m_AllMinions.Remove(minion);
-m_ZombiMinions.Add(minion);
-minion.transform.position = m_poolPosition.position;
+    m_AllMinions.Remove(minion);
+    m_ZombiMinions.Add(minion);
+    minion.gameObject.SetActive(false);
+    minion.transform.position = m_poolPosition.position;
 }
 
 public GameObject AddMinion(GameObject minion)
 {
-var min = Instantiate(minion, m_spaunPoint.position, Quaternion.identity);
+var min = Instantiate(minion, m_spaunPoint.position, Quaternion.identity); 
 m_AllMinions.Add(minion.GetComponent<BaseMinion>());
-
 return min;
 }
 
 public GameObject GetFreeMinion(GameObject minion)
 {
-    BaseMinion minionComponent = minion.GetComponent<BaseMinion>();
+BaseMinion minionComponent = minion.GetComponent<BaseMinion>();
 
 foreach(var obj in m_ZombiMinions) 
 {
-    if(!obj.gameObject.activeInHierarchy)
-    {
-        m_AllMinions.Add(minionComponent);
-        obj.transform.position = m_spaunPoint.position;
+    if(!obj.gameObject.activeSelf){
+        
+        m_ZombiMinions.Remove(obj);
+        m_AllMinions.Add(obj);
         obj.gameObject.SetActive(true);
+
         return obj.gameObject;
     }
 }

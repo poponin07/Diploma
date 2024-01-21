@@ -8,30 +8,21 @@ namespace TowerDefense
     public class BuildAgent : MonoBehaviour
     { 
         private BuildComponent m_buildComponent;
+        
+
 
         public void Initialization(BuildComponent buildComponent)
         {
             m_buildComponent = buildComponent;
-        }
-    private void OnCollisionStay(Collision other)
-    {
-       
-    }
-
-   /* private void OnTriggerStay(Collider other)
-    {
         
-        if (other.gameObject.tag == "Path")
-        {
-            m_buildComponent.SetMayBuild(false);
-            Debug.Log("path");
         }
-        else
+
+        public void AfterBuildTodtr()
         {
-            m_buildComponent.SetMayBuild(true);
-            Debug.Log("NOpath");
+            SphereCollider sphereCollider = GetComponentInChildren<SphereCollider>();
+            sphereCollider.enabled = true;
+            BuildAgent.Destroy(this);
         }
-    }*/
 
     private void OnTriggerStay(Collider other)
     {

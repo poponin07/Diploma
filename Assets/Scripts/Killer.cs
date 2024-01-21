@@ -11,7 +11,7 @@ namespace TowerDefense
         private void OnTriggerEnter(Collider other)
         {
             BaseMinion minion = other.GetComponent<BaseMinion>();
-         m_poolComponent.DisableMinion(minion);
+            m_poolComponent.DisableMinion(minion);
         }
         
     }
