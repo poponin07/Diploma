@@ -10,8 +10,12 @@ namespace TowerDefense
         [SerializeField] private PoolComponent m_poolComponent;
         private void OnTriggerEnter(Collider other)
         {
-            BaseMinion minion = other.GetComponent<BaseMinion>();
-            m_poolComponent.DisableMinion(minion);
+            if (other.gameObject.tag == "Minion")
+            {
+                BaseMinion minion = other.GetComponent<BaseMinion>();
+                m_poolComponent.DisableMinion(minion); 
+            }
+            
         }
         
     }

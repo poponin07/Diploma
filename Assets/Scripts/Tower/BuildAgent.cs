@@ -21,7 +21,7 @@ namespace TowerDefense
         {
             SphereCollider sphereCollider = GetComponentInChildren<SphereCollider>();
             sphereCollider.enabled = true;
-            BuildAgent.Destroy(this);
+            Destroy(this);
         }
 
     private void OnTriggerStay(Collider other)

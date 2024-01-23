@@ -4567,7 +4567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_poolPosition: {fileID: 709438343}
-  m_zombi: {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e, type: 3}
+  m_zombi: {fileID: 5456074818840628070, guid: 72c514b29b524c14c9462d8ff21dfa0b, type: 3}
   m_AllMinions: []
   m_ZombiMinions: []
 --- !u!1 &770431407

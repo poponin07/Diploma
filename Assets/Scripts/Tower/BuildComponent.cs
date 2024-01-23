@@ -67,12 +67,14 @@ private void Awake()
                 if (plane.Raycast(ray, out float distance))
                 {
                     towerB.transform.position = ray.GetPoint(distance);
+                    ShootComponent shoot = towerB.GetComponent<ShootComponent>();
 
                     if (Input.GetKeyDown(KeyCode.Mouse0) && isBuild)
                     {
                         buildAgent.enabled = false;
                         buildAgent.gameObject.GetComponent<BoxCollider>().isTrigger = true;
                         buildAgent.AfterBuildTodtr();
+                        shoot.enabled = true;
                         break;
                     }
                 }
