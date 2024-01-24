@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d54c74a0-54ef-4b22-acb3-c08fa81ca6b6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Diploma/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Diploma/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Tower/Tower.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Tower/Tower.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Killer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Killer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ShootComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tower/ShootComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ShootComponent.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tower/ShootComponent.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tower/BuildAgent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tower/BuildAgent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tower/BuildComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tower/BuildComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Spawner/SpawnComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Spawner/SpawnComponent.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +27,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Projectile/ProjectileComponent.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Killer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Minions/MinoinMoveController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e8a406da998549af9a2680936c7da25a159c00/4d/aa44385f/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -113,6 +108,7 @@
       <workItem from="1705868123634" duration="2710000" />
       <workItem from="1705902278822" duration="8250000" />
       <workItem from="1706026909590" duration="2118000" />
+      <workItem from="1706109187345" duration="2250000" />
     </task>
     <servers />
   </component>

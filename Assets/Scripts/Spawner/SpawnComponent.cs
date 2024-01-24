@@ -24,7 +24,7 @@ namespace TowerDefense
 
             m_poolComponent = GetComponent<PoolComponent>();
 
-            m_spawnOffset = 2f;
+            m_spawnOffset = 1f;
             
             StartCoroutine(SpawnCor());
         }
