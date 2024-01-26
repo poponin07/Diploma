@@ -1158,4 +1158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_health: 0
   m_speed: 0
-  m_type: 0
+  m_damage: 0
+  m_element: 0
+  m_type: 1
+  m_iselemental: 0

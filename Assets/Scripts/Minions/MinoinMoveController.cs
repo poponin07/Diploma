@@ -9,7 +9,7 @@ public class MinoinMoveController : MonoBehaviour
 {
     [SerializeField] public List<Transform> m_points = new List<Transform>(); 
     private BaseMinion data;
-    private Transform target;
+    [SerializeField] private Transform target;
     private int indx;
     private NavMeshAgent m_agent;
 

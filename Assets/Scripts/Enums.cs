@@ -17,4 +17,13 @@ public enum ElementType : byte
     Ice = 2,
     Poison = 3,
 }
+
+public enum MinionType : byte
+{
+    None = 0,
+    Zomby = 1,
+    Spider = 2,
+    Poison = 3,
+}
+
 }

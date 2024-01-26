@@ -8797,6 +8797,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tower_1: {fileID: 6315430772408577877, guid: f0939e80c1e530c429192e7709577908, type: 3}
   isBuild: 0
+--- !u!114 &1413185672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 764476793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd2eca6a2198b84f8377771ac16e0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CurWave: {fileID: 0}
+  m_CurWaveIndex: 0
+  m_indexWave: 0
+  m_spawnComponent: {fileID: 764476795}
+  m_waveGrs:
+  - {fileID: 11400000, guid: e31f0c43c4aacd3408bb8c05e34ba6a5, type: 2}
 --- !u!1 &1421655089 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1298568534607994, guid: 196e176e4da73bf449dba8cd3bb4a986,
