@@ -18,10 +18,11 @@ namespace TowerDefense
         private void Start()
         {
             m_CurWave = m_waveGrs[m_CurWaveIndex];
-            NextWave();
+            ConfigurationMinions();
+            //NextWave();
         }
 
-        private void NextWave()
+        public void NextWave()
         {
             CheckWave();
             m_indexWave++;
@@ -31,26 +32,40 @@ namespace TowerDefense
 
         private void CheckWave()
         {
-            if (m_indexWave == 10 || m_indexWave == 0)
+            if (m_indexWave == 2)
             {
                 ChangeWaveParams();
             }
         }
 
+        private void GetMinionsWaveData()
+        {
+            foreach (var VARIABLE in m_CurWave.minioms)
+            {
+                
+            }
+        }
+        
         private void ChangeWaveParams()
         {
             m_indexWave = 0;
             m_CurWaveIndex++;
-            if (m_CurWaveIndex >= 5)
+            
+            if (m_CurWaveIndex >= m_waveGrs.Count)
             {
                 return;
             }
-
+            
+            m_CurWave = m_waveGrs[m_CurWaveIndex];
+            
+            
             ConfigurationMinions();
         }
 
         private void ConfigurationMinions()
         {
+            m_minions.Clear();
+            
             foreach (var obj  in m_CurWave.minioms)
             {
                 BaseMinion minion = obj.GetComponent<BaseMinion>();
@@ -59,10 +74,19 @@ namespace TowerDefense
                 {
                     case ZombiComponent:
                     {
-                        minion.Damage += m_CurWave.addDamageZomby;
-                        minion.Health += m_CurWave.addHealthZomby;
-                        minion.Speed += m_CurWave.addMoveZomby;
+                        minion.Damage = m_CurWave.addDamageZomby;
+                        minion.Health = m_CurWave.addHealthZomby;
+                        minion.Speed = m_CurWave.addMoveZomby;
                         minion.m_iselemental = m_CurWave.isElementalzomby;
+                        break;
+                    } 
+                    
+                    case SpiderComponent:
+                    {
+                        minion.Damage = m_CurWave.addDamageSpider;
+                        minion.Health = m_CurWave.addHealthSpider;
+                        minion.Speed = m_CurWave.moveSpider;
+                        minion.m_iselemental = m_CurWave.isElementalSpider;
                         break;
                     } 
                 }

@@ -18,7 +18,7 @@ namespace TowerDefense
         
         [Header("Grade spider")] 
         public bool isElementalSpider;
-        public float addHealth;
+        public float addHealthSpider;
         public float moveSpider;
         public float addDamageSpider;
     }

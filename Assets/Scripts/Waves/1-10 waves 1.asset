@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d03682159d9c249bfb78a8356b8151, type: 3}
-  m_Name: 1-10 waves
+  m_Name: 1-10 waves 1
   m_EditorClassIdentifier: 
   minioms:
   - {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e, type: 3}
   isElementalzomby: 0
-  addHealthZomby: 0
+  addHealthZomby: 100
   addMoveZomby: 0
   addDamageZomby: 0
   isElementalSpider: 0
-  addHealth: 0
+  addHealthSpider: 200
   moveSpider: 0
   addDamageSpider: 0
