@@ -12,7 +12,6 @@ namespace TowerDefense
     {
         [SerializeField] private Transform m_spawnPointTransform;
         private float m_spawnOffset;
-        [SerializeField] private GameObject m_zombPrefab;
         [SerializeField] private Transform path;
         [SerializeField] private List<Transform> m_path;
         [SerializeField] private PoolComponent m_poolComponent;
@@ -23,6 +22,7 @@ namespace TowerDefense
         private int m_CurSpiderCount;
 
         private Coroutine spawnCor;
+        private WaveManager m_waveManager;
 
         private void Start()
         {
@@ -31,6 +31,8 @@ namespace TowerDefense
             m_path.Remove(m_path[0]);
 
             m_spawnOffset = 0.5f;
+
+            m_waveManager = m_poolComponent.gameObject.GetComponent<WaveManager>();
 
         }
 
@@ -81,6 +83,7 @@ namespace TowerDefense
         {
             int minInd = 0;
             GameObject min = m_poolComponent.SetMinion(obj, m_spawnPointTransform);
+            min.GetComponent<BaseMinion>().Initialization(m_waveManager);
             MinoinMoveController moveComponent = min.GetComponent<MinoinMoveController>();
             moveComponent.SetTarget();
             moveComponent.SetRunIndex(-1);

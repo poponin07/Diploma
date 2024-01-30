@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 namespace TowerDefense
 {
-    public class BaseMinion : MonoBehaviour
+    public class BaseMinion : MonoBehaviour, IGetDamage
     {
         [SerializeField] private float m_health;
         [SerializeField] private float m_speed;
@@ -12,8 +13,8 @@ namespace TowerDefense
         [SerializeField] private ElementType m_element;
         [SerializeField] private MinionType m_type;
         public bool m_iselemental;
-
-        
+        private UnityAction m_DieAction;
+      
         public float Health
         {
             get { return m_health; }
@@ -47,7 +48,6 @@ namespace TowerDefense
                 m_type = value;
             }
         }
-        
         public ElementType Element
         {
             get { return m_element; }
@@ -55,6 +55,29 @@ namespace TowerDefense
             {
                 m_element = value;
             }
+        }
+        
+          
+        public void Initialization(WaveManager waveManager)
+        {
+           waveManager.GetMinionData(this);
+        }
+        
+        public void GetDamage(float damage)
+        {
+            m_health -= m_damage;
+            
+            OnDie();
+            
+            if (m_health <= 0)
+            {
+                OnDie();
+            }
+        }
+
+        public void OnDie()
+        {
+            Destroy(gameObject);
         }
     }
 }

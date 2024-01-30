@@ -18,6 +18,7 @@ public class PoolComponent : MonoBehaviour
 [SerializeField] private List<BaseMinion> m_SpiderMinions;
 private Transform m_spaunPoint;
 
+
 public GameObject SetMinion(GameObject minion, Transform point)
 {
 m_spaunPoint = point.transform;

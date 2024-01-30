@@ -64,11 +64,14 @@ namespace TowerDefense
              }
              
              m_Target = m_enemyTransforms.Last();
-             
+             if (m_Target == null)
+             {
+                 return;
+             }
              var spawnTransform = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
              ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, spawnTransform, Quaternion.identity).GetComponent<ProjectileComponent>();
-             projectile.m_target = m_Target.transform;
              m_CurCooldown = m_Cooldown;
+             projectile.m_target = m_Target.transform;
              m_CanShoot = false; 
          }
 
@@ -76,7 +79,6 @@ namespace TowerDefense
          {
              if (other.tag == "Minion") 
              {
-                 Debug.Log("enter");
                  if (!m_enemyTransforms.Contains(other.transform))
                  {
                      
@@ -89,11 +91,8 @@ namespace TowerDefense
          {
              if (other.tag == "Minion") 
              {
-                 Debug.Log("exit");
-                 
                  if (m_enemyTransforms.Contains(other.transform))
                  {
-                     
                      m_enemyTransforms.Remove(other.transform);
                  }
              }

@@ -61,6 +61,7 @@ namespace TowerDefense
             
             ConfigurationMinions();
         }
+        
 
         private void ConfigurationMinions()
         {
@@ -70,28 +71,36 @@ namespace TowerDefense
             {
                 BaseMinion minion = obj.GetComponent<BaseMinion>();
 
-                switch (minion)
-                {
-                    case ZombiComponent:
-                    {
-                        minion.Damage = m_CurWave.addDamageZomby;
-                        minion.Health = m_CurWave.addHealthZomby;
-                        minion.Speed = m_CurWave.addMoveZomby;
-                        minion.m_iselemental = m_CurWave.isElementalzomby;
-                        break;
-                    } 
-                    
-                    case SpiderComponent:
-                    {
-                        minion.Damage = m_CurWave.addDamageSpider;
-                        minion.Health = m_CurWave.addHealthSpider;
-                        minion.Speed = m_CurWave.moveSpider;
-                        minion.m_iselemental = m_CurWave.isElementalSpider;
-                        break;
-                    } 
-                }
+                minion = GetMinionData(minion);
                 m_minions.Add(obj);
             }
+        }
+
+        public BaseMinion GetMinionData(BaseMinion baseMinion)
+        {
+            switch (baseMinion)
+
+            {
+                case ZombiComponent:
+                {
+                    baseMinion.Damage = m_CurWave.addDamageZomby;
+                    baseMinion.Health = m_CurWave.addHealthZomby;
+                    baseMinion.Speed = m_CurWave.addMoveZomby;
+                    baseMinion.m_iselemental = m_CurWave.isElementalzomby;
+                    break;
+                }
+
+                case SpiderComponent:
+                {
+                    baseMinion.Damage = m_CurWave.addDamageSpider;
+                    baseMinion.Health = m_CurWave.addHealthSpider;
+                    baseMinion.Speed = m_CurWave.moveSpider;
+                    baseMinion.m_iselemental = m_CurWave.isElementalSpider;
+                    break;
+                }
+            }
+
+            return baseMinion;
         }
     }
 }

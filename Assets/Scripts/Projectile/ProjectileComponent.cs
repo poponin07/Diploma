@@ -12,6 +12,11 @@ public class ProjectileComponent : MonoBehaviour
     private float m_damage;
     public Transform m_target;
 
+    private void Start()
+    {
+        m_damage = 10000;
+    }
+
     private void FixedUpdate()
     {
         Move();
@@ -24,21 +29,16 @@ public class ProjectileComponent : MonoBehaviour
             Destroy(gameObject);
         }
         transform.LookAt(m_target);
-        //transform.position += Vector3.forward * m_speed * Time.deltaTime;
         gameObject.transform.Translate(Vector3.forward* m_speed * Time.deltaTime);
-    }
-
-    public void SetTarget(Transform miniom)
-    {
-        m_target = miniom;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
         if (other.gameObject.tag == "Minion")
         {
+            other.GetComponent<BaseMinion>().GetDamage(m_damage);
             Destroy(gameObject);
-            Debug.Log("Popal");
         }
     }
 }
