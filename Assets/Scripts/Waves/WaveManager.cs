@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Minions;
 using UnityEngine;
 
 namespace TowerDefense
@@ -19,7 +20,6 @@ namespace TowerDefense
         {
             m_CurWave = m_waveGrs[m_CurWaveIndex];
             ConfigurationMinions();
-            //NextWave();
         }
 
         public void NextWave()
@@ -38,13 +38,6 @@ namespace TowerDefense
             }
         }
 
-        private void GetMinionsWaveData()
-        {
-            foreach (var VARIABLE in m_CurWave.minioms)
-            {
-                
-            }
-        }
         
         private void ChangeWaveParams()
         {

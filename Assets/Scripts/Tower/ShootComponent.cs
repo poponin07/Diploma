@@ -46,7 +46,6 @@ namespace TowerDefense
              {
                  Shoot(); 
              }
-             
          }
          private void isCanShoot()
          {

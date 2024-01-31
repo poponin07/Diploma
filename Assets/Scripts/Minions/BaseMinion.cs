@@ -1,12 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Minions;
 using UnityEngine.Events;
 using UnityEngine;
 
 namespace TowerDefense
 {
-    public class BaseMinion : MonoBehaviour, IGetDamage
+    public class BaseMinion : MonoBehaviour, IGetDamage, IBaseMinion
     {
+        public float health { get => m_health; }
+        public float speed { get; }
+        public float damage { get; }
+        public ElementType element { get; }
+        public MinionType type { get; }
+        
         [SerializeField] private float m_health;
         [SerializeField] private float m_speed;
         [SerializeField] private float m_damage;

@@ -12,7 +12,7 @@ namespace TowerDefense
         {
             if (other.gameObject.tag == "Minion")
             {
-                BaseMinion minion = other.GetComponent<BaseMinion>();
+                BaseMinion minion = other.gameObject.GetComponent<BaseMinion>();
                 m_poolComponent.DisableMinion(minion); 
             }
             

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using TowerDefense;
 
-namespace TowerDefense
+namespace Minions
 {
 
     public class SpiderComponent : BaseMinion

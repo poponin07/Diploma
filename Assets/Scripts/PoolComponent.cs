@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
+using Minions;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 using Quaternion = UnityEngine.Quaternion;
 
 namespace TowerDefense
@@ -11,8 +13,6 @@ namespace TowerDefense
 public class PoolComponent : MonoBehaviour
 {
 [SerializeField]private Transform m_poolPosition;
-[SerializeField] private GameObject m_zombi;
-
 [SerializeField] private List<BaseMinion> m_AllMinions;
 [SerializeField] private List<BaseMinion> m_ZombiMinions;
 [SerializeField] private List<BaseMinion> m_SpiderMinions;
@@ -26,22 +26,19 @@ m_spaunPoint = point.transform;
  return min;
 }
 
-public void DisableMinion(BaseMinion minion)
+public void DisableMinion(IBaseMinion minion)
 {
-    m_AllMinions.Remove(minion);
-    //m_ZombiMinions.Add(minion);
-    EnableTypeMinion(true, minion.Type, minion);
-    
-    minion.gameObject.SetActive(false);
-    minion.transform.position = m_poolPosition.position;
+    Debug.LogError(minion.type);
+    // m_AllMinions.Remove((ZombiComponent)minion);
+    // EnableTypeMinion(true, minion.type, minion);
+    //
+    // minion.gameObject.SetActive(false);
+    // minion.transform.position = m_poolPosition.position;
 }
 
 public GameObject AddMinion(GameObject minion)
 {
 var min = Instantiate(minion, m_spaunPoint.position, Quaternion.identity);
-var baceMin = min.GetComponent<BaseMinion>();
-
-//EnableTypeMinion(true, baceMin.Type, baceMin);
 
 m_AllMinions.Add(minion.GetComponent<BaseMinion>());
 return min;
@@ -57,17 +54,18 @@ public GameObject GetFreeMinion(GameObject minion)
     if (minionComponent == MinionType.Spider)
         listPool = m_SpiderMinions;
     
-        foreach(var obj in listPool) 
-        {
-    if(listPool.Count > 0 && !obj.gameObject.activeSelf)
+    foreach(var obj in listPool) 
     {
-        EnableTypeMinion(false, minionComponent, obj);
-        m_AllMinions.Add(obj);
-        obj.gameObject.SetActive(true);
-        return obj.gameObject;
+        if(listPool.Count > 0 && !obj.gameObject.activeSelf)
+        {
+            EnableTypeMinion(false, minionComponent, obj);
+            m_AllMinions.Add(obj);
+            var gameObj = obj.gameObject;
+            gameObj.SetActive(true);
+            return gameObj;
+        }
     }
-}
-return AddMinion(minion);
+    return AddMinion(minion);
 }
 
 private void EnableTypeMinion(bool isAdd, MinionType type, BaseMinion minion)
