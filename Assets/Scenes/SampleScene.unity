@@ -4975,9 +4975,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_poolPosition: {fileID: 709438343}
+  m_spawnPoint: {fileID: 1931523193}
   m_AllMinions: []
-  m_ZombiMinions: []
-  m_SpiderMinions: []
+  m_zombiPrefab: {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e,
+    type: 3}
+  m_spiderPrefab: {fileID: 5128811620208064792, guid: e42dce10de392fb46b7cf553d7658cf4,
+    type: 3}
 --- !u!1 &770431407
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,16 +11,15 @@ namespace TowerDefense
     public class SpawnComponent : MonoBehaviour
     {
         [SerializeField] private Transform m_spawnPointTransform;
-        private float m_spawnOffset;
         [SerializeField] private Transform path;
         [SerializeField] private List<Transform> m_path;
         [SerializeField] private PoolComponent m_poolComponent;
-
+        
+        private float m_spawnOffset;
         private int m_ZombiGainCount = 2;
         private int m_CurZombiCount;
         private int m_SpiderGainCount = 1;
         private int m_CurSpiderCount;
-
         private Coroutine spawnCor;
         private WaveManager m_waveManager;
 
@@ -38,7 +37,7 @@ namespace TowerDefense
 
        [SerializeField] private List<GameObject> mini = new List<GameObject>();
 
-        public void StartSwawn(List<GameObject> minions)
+        public void StartSpawn(List<GameObject> minions)
         {
             mini = minions;
             int indxZomby = m_ZombiGainCount + m_CurZombiCount;
@@ -51,8 +50,8 @@ namespace TowerDefense
 
             foreach (var obj in minions)
             {
-
-                switch (obj.GetComponent<BaseMinion>().Type)
+                var minionType = obj.GetComponent<BaseMinion>().Type;
+                switch (minionType)
                 {
                     case MinionType.Zomby:
                         for (int i = 0; i < indxZomby; i++)
@@ -79,19 +78,19 @@ namespace TowerDefense
             StartCoroutine(SpawnOffset(spawnList));
         }
 
-        private void SpawnMinion(GameObject obj)
+        private void SpawnMinion(BaseMinion minion)
         {
             int minInd = 0;
-            GameObject min = m_poolComponent.SetMinion(obj, m_spawnPointTransform);
-            min.GetComponent<BaseMinion>().Initialization(m_waveManager);
-            MinoinMoveController moveComponent = min.GetComponent<MinoinMoveController>();
+            BaseMinion minionBaseComp = m_poolComponent.Pull(minion, m_spawnPointTransform);
+            minionBaseComp.Initialization(m_waveManager);
+            MinoinMoveController moveComponent = minionBaseComp.gameObject.GetComponent<MinoinMoveController>();
             moveComponent.SetTarget();
             moveComponent.SetRunIndex(-1);
-            min.transform.position = m_spawnPointTransform.position;
+            minionBaseComp.transform.position = m_spawnPointTransform.position;
             moveComponent.m_points = m_path;
             minInd++;
 
-            switch (obj.GetComponent<BaseMinion>().Type)
+            switch (minion.Type)
             {
                 case MinionType.Zomby:
                     if (minInd > (m_ZombiGainCount + m_CurZombiCount))
@@ -118,7 +117,8 @@ namespace TowerDefense
             foreach (var obj in spawnList)
             {
                 yield return new WaitForSeconds(m_spawnOffset);
-                SpawnMinion(obj);
+                BaseMinion minion = obj.GetComponent<BaseMinion>();
+                SpawnMinion(minion);
             }
         }
     }

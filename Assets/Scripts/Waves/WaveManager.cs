@@ -26,7 +26,7 @@ namespace TowerDefense
         {
             CheckWave();
             m_indexWave++;
-            m_spawnComponent.StartSwawn(m_minions);
+            m_spawnComponent.StartSpawn(m_minions);
           
         }
 

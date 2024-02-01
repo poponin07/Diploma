@@ -1,101 +1,111 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Numerics;
-using Minions;
+﻿using System.Collections.Generic;
+using TowerDefense;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Debug = UnityEngine.Debug;
-using Quaternion = UnityEngine.Quaternion;
 
-namespace TowerDefense
-{
 public class PoolComponent : MonoBehaviour
 {
-[SerializeField]private Transform m_poolPosition;
-[SerializeField] private List<BaseMinion> m_AllMinions;
-[SerializeField] private List<BaseMinion> m_ZombiMinions;
-[SerializeField] private List<BaseMinion> m_SpiderMinions;
-private Transform m_spaunPoint;
-
-
-public GameObject SetMinion(GameObject minion, Transform point)
-{
-m_spaunPoint = point.transform;
- var min = GetFreeMinion(minion);
- return min;
-}
-
-public void DisableMinion(IBaseMinion minion)
-{
-    Debug.LogError(minion.type);
-    // m_AllMinions.Remove((ZombiComponent)minion);
-    // EnableTypeMinion(true, minion.type, minion);
-    //
-    // minion.gameObject.SetActive(false);
-    // minion.transform.position = m_poolPosition.position;
-}
-
-public GameObject AddMinion(GameObject minion)
-{
-var min = Instantiate(minion, m_spaunPoint.position, Quaternion.identity);
-
-m_AllMinions.Add(minion.GetComponent<BaseMinion>());
-return min;
-}
-
-public GameObject GetFreeMinion(GameObject minion)
-{
-    var minionComponent = minion.GetComponent<BaseMinion>().Type;
-    List<BaseMinion> listPool = new List<BaseMinion>();
+    [SerializeField] private Transform m_poolPosition;
+    [SerializeField] private Transform m_spawnPoint;
+    [SerializeField] private List<BaseMinion> m_AllMinions;
+    [SerializeField] private GameObject m_zombiPrefab;
+    [SerializeField] private GameObject m_spiderPrefab;
     
-    if (minionComponent == MinionType.Zomby)
-        listPool = m_ZombiMinions;
-    if (minionComponent == MinionType.Spider)
-        listPool = m_SpiderMinions;
-    
-    foreach(var obj in listPool) 
+    private List<BaseMinion> m_dictionaryZombi = new List<BaseMinion>();
+    private List<BaseMinion> m_dictionarySpider = new List<BaseMinion>();
+  
+
+    private void Start()
     {
-        if(listPool.Count > 0 && !obj.gameObject.activeSelf)
+        FillingPool();
+    }
+    
+    public BaseMinion Pull(BaseMinion minion, Transform spawnPoint)
+    {
+        List<BaseMinion> minions = DeterminationMinionType(minion);
+
+        foreach (var pair in minions)
         {
-            EnableTypeMinion(false, minionComponent, obj);
-            m_AllMinions.Add(obj);
-            var gameObj = obj.gameObject;
-            gameObj.SetActive(true);
-            return gameObj;
+            BaseMinion baseMinion = pair;
+            
+            if (minions.Count > 0 && !baseMinion.gameObject.activeSelf)
+            {
+                m_AllMinions.Add(baseMinion);
+                baseMinion.gameObject.transform.position = m_spawnPoint.position;
+                baseMinion.gameObject.SetActive(true);
+                
+                return baseMinion;
+            }
+        }
+        
+        var newMinion = Instantiate(minion, m_spawnPoint.position, Quaternion.identity);
+        BaseMinion newBaseMinion = newMinion.GetComponent<BaseMinion>();
+
+        if (minion.Type == MinionType.Zomby)
+        {
+            m_dictionaryZombi.Add(newBaseMinion);
+        }
+        if (newMinion.Type == MinionType.Spider)
+        {
+            m_dictionarySpider.Add(newBaseMinion);
+        }
+        
+        m_AllMinions.Add(minion.GetComponent<BaseMinion>());
+        
+        return newBaseMinion;
+    }
+
+    public void Push(BaseMinion minion)
+    {
+        List<BaseMinion> minions = DeterminationMinionType(minion);
+
+        foreach (var pair in minions)
+        {
+            if (pair == minion)
+            {
+                minion.gameObject.transform.position = m_poolPosition.position;
+                m_AllMinions.Remove(minion);
+                minion.gameObject.SetActive(false);
+            }
         }
     }
-    return AddMinion(minion);
-}
 
-private void EnableTypeMinion(bool isAdd, MinionType type, BaseMinion minion)
-{
-    if (isAdd)
+    private  List<BaseMinion>  DeterminationMinionType(BaseMinion minion)
     {
+        MinionType type = minion.Type;
+       List<BaseMinion> minions = new List<BaseMinion>();
+
         if (type == MinionType.Zomby)
         {
-            m_ZombiMinions.Add(minion); 
+            minions = m_dictionaryZombi;
         }
 
         if (type == MinionType.Spider)
         {
-            m_SpiderMinions.Add(minion); 
-        }
-    }
-    else
-    {
-        if (type == MinionType.Zomby)
-        {
-            m_ZombiMinions.Remove(minion); 
+            minions = m_dictionarySpider;
         }
 
-        if (type == MinionType.Spider)
-        {
-            m_SpiderMinions.Remove(minion); 
-        }
+        return minions;
     }
     
-}
-
-}
+    private void FillingPool()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject zombi = Instantiate(m_zombiPrefab, m_poolPosition.position, Quaternion.identity);
+            zombi.SetActive(false);
+            BaseMinion baseMinion = zombi.GetComponent<BaseMinion>();
+            m_dictionaryZombi.Add(baseMinion);
+        }
+        
+        for (int i = 0; i < 10; i++)
+        {
+            GameObject spider = Instantiate(m_spiderPrefab, m_poolPosition.position, Quaternion.identity);
+            spider.SetActive(false);
+            BaseMinion baseMinion = spider.GetComponent<BaseMinion>();
+            m_dictionarySpider.Add(baseMinion);
+        }
+        
+    }
+        
+    
 }

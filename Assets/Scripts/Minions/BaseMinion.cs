@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Minions;
+﻿using Minions;
 using UnityEngine.Events;
 using UnityEngine;
 
@@ -8,11 +6,13 @@ namespace TowerDefense
 {
     public class BaseMinion : MonoBehaviour, IGetDamage, IBaseMinion
     {
-        public float health { get => m_health; }
-        public float speed { get; }
-        public float damage { get; }
-        public ElementType element { get; }
-        public MinionType type { get; }
+      /*  public float health { get => m_health; set => m_health = value; }
+        public float speed { get => m_speed; set => m_health = value;}
+        public float damage { get => m_damage; set => m_damage = value;}
+        public ElementType element { get; set; }
+        public MinionType type { get => m_element;
+            set => m_element = value;
+        }*/
         
         [SerializeField] private float m_health;
         [SerializeField] private float m_speed;
