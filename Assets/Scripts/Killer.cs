@@ -13,7 +13,9 @@ namespace TowerDefense
             if (other.gameObject.tag == "Minion")
             {
                 BaseMinion minion = other.gameObject.GetComponent<BaseMinion>();
-                m_poolComponent.Push(minion); 
+                minion.Despawn();
+                // m_dynamicPool.Release();
+                //m_poolComponent.Push(minion); 
             }
             
         }

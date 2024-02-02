@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Minions;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace TowerDefense
 {
@@ -14,12 +15,21 @@ namespace TowerDefense
         [SerializeField] private int m_indexWave;
         [SerializeField] private SpawnComponent m_spawnComponent;
         [SerializeField] private List<WaveGr> m_waveGrs;
-        [SerializeField] private List<GameObject> m_minions;
+        [SerializeField] private List<MinionType> m_minions;
+        [SerializeField] private List<BaseMinion> m_AllMinions;
 
         private void Start()
         {
             m_CurWave = m_waveGrs[m_CurWaveIndex];
             ConfigurationMinions();
+        }
+
+        private void Update()
+        {
+            if (m_AllMinions.Count <= 0)
+            {
+                Debug.Log("End wave");
+            }
         }
 
         public void NextWave()
@@ -38,7 +48,6 @@ namespace TowerDefense
             }
         }
 
-        
         private void ChangeWaveParams()
         {
             m_indexWave = 0;
@@ -51,10 +60,18 @@ namespace TowerDefense
             
             m_CurWave = m_waveGrs[m_CurWaveIndex];
             
-            
             ConfigurationMinions();
         }
+
+        private void MinionSpawn(BaseMinion minion)
+        {
+            m_AllMinions.Add(minion);
+        }
         
+        private void MinionDespawn(BaseMinion minion)
+        {
+            m_AllMinions.Remove(minion);
+        }
 
         private void ConfigurationMinions()
         {
@@ -64,12 +81,12 @@ namespace TowerDefense
             {
                 BaseMinion minion = obj.GetComponent<BaseMinion>();
 
-                minion = GetMinionData(minion);
-                m_minions.Add(obj);
+                minion = SetMinionParametersByWave(minion);
+                m_minions.Add(minion.Type);
             }
         }
 
-        public BaseMinion GetMinionData(BaseMinion baseMinion)
+        public BaseMinion SetMinionParametersByWave(BaseMinion baseMinion)
         {
             switch (baseMinion)
 
@@ -79,7 +96,9 @@ namespace TowerDefense
                     baseMinion.Damage = m_CurWave.addDamageZomby;
                     baseMinion.Health = m_CurWave.addHealthZomby;
                     baseMinion.Speed = m_CurWave.addMoveZomby;
-                    baseMinion.m_iselemental = m_CurWave.isElementalzomby;
+                    baseMinion.m_isElemental = m_CurWave.isElementalzomby;
+                    baseMinion.onSpawn += MinionSpawn;
+                    baseMinion.onDied += MinionDespawn;
                     break;
                 }
 
@@ -88,7 +107,9 @@ namespace TowerDefense
                     baseMinion.Damage = m_CurWave.addDamageSpider;
                     baseMinion.Health = m_CurWave.addHealthSpider;
                     baseMinion.Speed = m_CurWave.moveSpider;
-                    baseMinion.m_iselemental = m_CurWave.isElementalSpider;
+                    baseMinion.m_isElemental = m_CurWave.isElementalSpider;
+                    baseMinion.onSpawn += MinionSpawn;
+                    baseMinion.onDied += MinionDespawn;
                     break;
                 }
             }

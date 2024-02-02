@@ -22,7 +22,7 @@ namespace TowerDefense
         [Range(0, 100)] 
         [SerializeField] private float m_range;
 
-        private List<Transform> m_enemyTransforms = new List<Transform>();
+        [SerializeField]private List<Transform> m_enemyTransforms = new List<Transform>();
 
         private void Start() 
          {
@@ -57,16 +57,26 @@ namespace TowerDefense
          
          private void Shoot()
          {
-             if (m_enemyTransforms.Count < 1)
+             if (m_enemyTransforms.Count > 0)
              {
-                 return;
+                 m_Target = m_enemyTransforms.Last();
              }
-             
-             m_Target = m_enemyTransforms.Last();
+
              if (m_Target == null)
              {
                  return;
              }
+
+             if (m_Target.gameObject.activeSelf == false || m_enemyTransforms.Count < 1)
+             {
+                 if (Vector3.Distance(gameObject.transform.position, m_Target.position) > m_range)
+                 {
+                     m_enemyTransforms.Remove(m_Target);
+                     m_Target = null;
+                 }
+                 return;
+             }
+
              var spawnTransform = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
              ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, spawnTransform, Quaternion.identity).GetComponent<ProjectileComponent>();
              m_CurCooldown = m_Cooldown;
@@ -80,7 +90,6 @@ namespace TowerDefense
              {
                  if (!m_enemyTransforms.Contains(other.transform))
                  {
-                     
                      m_enemyTransforms.Add(other.transform);
                  }
              }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TowerDefense;
 using UnityEngine;
 
@@ -10,22 +11,22 @@ public class PoolComponent : MonoBehaviour
     [SerializeField] private GameObject m_zombiPrefab;
     [SerializeField] private GameObject m_spiderPrefab;
     
-    private List<BaseMinion> m_dictionaryZombi = new List<BaseMinion>();
-    private List<BaseMinion> m_dictionarySpider = new List<BaseMinion>();
+    [SerializeField] private List<BaseMinion> m_dictionaryZombi = new List<BaseMinion>();
+    [SerializeField] private List<BaseMinion> m_dictionarySpider = new List<BaseMinion>();
   
 
     private void Start()
     {
-        FillingPool();
+        //FillingPool();
     }
     
-    public BaseMinion Pull(BaseMinion minion, Transform spawnPoint)
+    public BaseMinion Pull(BaseMinion minion)
     {
         List<BaseMinion> minions = DeterminationMinionType(minion);
 
-        foreach (var pair in minions)
+        foreach (var poolMinion in minions)
         {
-            BaseMinion baseMinion = pair;
+            BaseMinion baseMinion = poolMinion;
             
             if (minions.Count > 0 && !baseMinion.gameObject.activeSelf)
             {
@@ -86,7 +87,7 @@ public class PoolComponent : MonoBehaviour
 
         return minions;
     }
-    
+
     private void FillingPool()
     {
         for (int i = 0; i < 10; i++)

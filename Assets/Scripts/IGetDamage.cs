@@ -7,6 +7,6 @@ namespace TowerDefense
     interface IGetDamage
     {
        void GetDamage(float damage);
-       void OnDie();
+       void Despawn();
     }
 }

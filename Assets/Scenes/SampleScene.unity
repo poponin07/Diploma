@@ -4960,26 +4960,10 @@ MonoBehaviour:
   - {fileID: 159410109}
   - {fileID: 1484227134}
   - {fileID: 2018070342}
-  m_poolComponent: {fileID: 764476796}
-  mini: []
---- !u!114 &764476796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764476793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05e27b632dbc5dd468c284474973722f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_poolPosition: {fileID: 709438343}
-  m_spawnPoint: {fileID: 1931523193}
-  m_AllMinions: []
-  m_zombiPrefab: {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e,
+  m_waveManager: {fileID: 1413185672}
+  m_zombieTemplate: {fileID: 8840168458281795160, guid: 2869f50f08793594889040a0ec4b691e,
     type: 3}
-  m_spiderPrefab: {fileID: 5128811620208064792, guid: e42dce10de392fb46b7cf553d7658cf4,
+  m_spiderTemplate: {fileID: 7471452689909358691, guid: e42dce10de392fb46b7cf553d7658cf4,
     type: 3}
 --- !u!1 &770431407
 GameObject:
@@ -7817,7 +7801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11820b4da9617b49ab3388c6f85f892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_poolComponent: {fileID: 764476796}
+  m_poolComponent: {fileID: 0}
 --- !u!1 &1181974546
 GameObject:
   m_ObjectHideFlags: 0
@@ -9221,7 +9205,8 @@ MonoBehaviour:
   m_waveGrs:
   - {fileID: 11400000, guid: dc1f9a72b8e8ea040b279a9333c75cd3, type: 2}
   - {fileID: 11400000, guid: e31f0c43c4aacd3408bb8c05e34ba6a5, type: 2}
-  m_minions: []
+  m_minions: 
+  m_AllMinions: []
 --- !u!1 &1421655089 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1298568534607994, guid: 196e176e4da73bf449dba8cd3bb4a986,

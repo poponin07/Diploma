@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Minions;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -13,15 +14,21 @@ namespace TowerDefense
         [SerializeField] private Transform m_spawnPointTransform;
         [SerializeField] private Transform path;
         [SerializeField] private List<Transform> m_path;
-        [SerializeField] private PoolComponent m_poolComponent;
+        [SerializeField] private WaveManager m_waveManager;
+        [SerializeField] private ZombiComponent m_zombieTemplate;
+        [SerializeField] private SpiderComponent m_spiderTemplate;
         
         private float m_spawnOffset;
-        private int m_ZombiGainCount = 2;
-        private int m_CurZombiCount;
-        private int m_SpiderGainCount = 1;
-        private int m_CurSpiderCount;
+        private int m_currentWave;
+        private DynamicPool.DynamicPool m_dynamicPool = new DynamicPool.DynamicPool();
+
+        private Dictionary<MinionType, int> m_typeMultipliers = new Dictionary<MinionType, int>()
+        {
+            {MinionType.Zomby, 2},
+            {MinionType.Spider, 1}
+        };
+        
         private Coroutine spawnCor;
-        private WaveManager m_waveManager;
 
         private void Start()
         {
@@ -30,96 +37,114 @@ namespace TowerDefense
             m_path.Remove(m_path[0]);
 
             m_spawnOffset = 0.5f;
-
-            m_waveManager = m_poolComponent.gameObject.GetComponent<WaveManager>();
-
+        }
+        
+        public void StartSpawn(List<MinionType> minions)
+        {
+            m_currentWave++;
+            var waveDesc = CreateWaveDesc(minions);
+            var waveEnemies = GetWaveEnemies(waveDesc);
+            StartCoroutine(SpawnOffset(waveEnemies));
         }
 
-       [SerializeField] private List<GameObject> mini = new List<GameObject>();
-
-        public void StartSpawn(List<GameObject> minions)
+        IEnumerator SpawnOffset(List<BaseMinion> spawnList)
         {
-            mini = minions;
-            int indxZomby = m_ZombiGainCount + m_CurZombiCount;
-            int indxSpider = m_SpiderGainCount + m_CurSpiderCount;
-
-            m_CurZombiCount += m_ZombiGainCount;
-            m_CurSpiderCount += m_SpiderGainCount;
-
-            List<GameObject> spawnList = new List<GameObject>();
-
-            foreach (var obj in minions)
-            {
-                var minionType = obj.GetComponent<BaseMinion>().Type;
-                switch (minionType)
-                {
-                    case MinionType.Zomby:
-                        for (int i = 0; i < indxZomby; i++)
-                        {
-                            spawnList.Add(obj);
-                        }
-
-                        break;
-
-                    case MinionType.Spider:
-                        for (int i = 0; i < indxSpider; i++)
-                        {
-                            spawnList.Add(obj);
-                        }
-
-                        break;
-                }
-            }
-            SpawnMinionCor(spawnList);
-        }
-
-        private void SpawnMinionCor(List<GameObject> spawnList)
-        {
-            StartCoroutine(SpawnOffset(spawnList));
-        }
-
-        private void SpawnMinion(BaseMinion minion)
-        {
-            int minInd = 0;
-            BaseMinion minionBaseComp = m_poolComponent.Pull(minion, m_spawnPointTransform);
-            minionBaseComp.Initialization(m_waveManager);
-            MinoinMoveController moveComponent = minionBaseComp.gameObject.GetComponent<MinoinMoveController>();
-            moveComponent.SetTarget();
-            moveComponent.SetRunIndex(-1);
-            minionBaseComp.transform.position = m_spawnPointTransform.position;
-            moveComponent.m_points = m_path;
-            minInd++;
-
-            switch (minion.Type)
-            {
-                case MinionType.Zomby:
-                    if (minInd > (m_ZombiGainCount + m_CurZombiCount))
-                    {
-                        return;
-                    }
-
-                    break;
-
-                case MinionType.Spider:
-                    if (minInd > (m_SpiderGainCount + m_CurSpiderCount))
-                    {
-                        return;
-                    }
-
-                    break;
-            }
-
-            return; 
-        }
-
-        IEnumerator SpawnOffset(List<GameObject> spawnList)
-        {
-            foreach (var obj in spawnList)
+            foreach (var minion in spawnList)
             {
                 yield return new WaitForSeconds(m_spawnOffset);
-                BaseMinion minion = obj.GetComponent<BaseMinion>();
-                SpawnMinion(minion);
+                
+                //var poolMininon = 
+                InitMinionOnPosition(minion);
             }
+        }
+
+        private void InitMinionOnPosition(BaseMinion minion)
+        {
+            m_waveManager.SetMinionParametersByWave(minion);
+            MinoinMoveController moveComponent = minion.gameObject.GetComponent<MinoinMoveController>();
+            moveComponent.SetTarget();
+            moveComponent.SetRunIndex(-1);
+            minion.transform.position = m_spawnPointTransform.position;
+            moveComponent.m_points = m_path;
+            minion.gameObject.SetActive(true);
+            minion.Spawn();
+        }
+
+        private List<BaseMinion> CreateEnemiesByType(MinionType type, int count)
+        {
+            var result = new List<BaseMinion>(count);
+            Func<BaseMinion> createMethod = null;
+            
+            switch (type)
+            {
+                case MinionType.Zomby:
+                    createMethod = CreateZombie;
+                    break;
+            
+                case MinionType.Spider:
+                    createMethod = CreateSpider;
+                    break;
+            }
+
+            if (createMethod == null)
+            {
+                Debug.LogError("Method for create " + type + " does not exist!!!");
+            }
+            
+            for (int i = 0; i < count; i++)
+            {
+               result.Add((BaseMinion)m_dynamicPool.GetFromPool(type, createMethod));
+            }
+
+            return result;
+        }
+
+        private ZombiComponent CreateZombie()
+        {
+            var result = Instantiate(m_zombieTemplate, m_spawnPointTransform.position, Quaternion.identity);
+            result.gameObject.SetActive(false);
+            result.onDied += OnDied;
+            return result;
+        }
+
+        private SpiderComponent CreateSpider()
+        {
+            var result = Instantiate(m_spiderTemplate, m_spawnPointTransform.position, Quaternion.identity);
+            result.gameObject.SetActive(false);
+            result.onDied += OnDied;
+            return result;
+        }
+        
+        private void OnDied(BaseMinion obj)
+        {
+            m_dynamicPool.Release(obj.Type, obj);
+        }
+        
+        private List<BaseMinion> GetWaveEnemies(Dictionary<MinionType, int> waveDesc)
+        {
+            List<BaseMinion> spawnList = new List<BaseMinion>();
+
+            foreach (var typePair in waveDesc)
+            {
+                spawnList.AddRange(CreateEnemiesByType(typePair.Key, typePair.Value));
+            }
+
+            return spawnList;
+        }
+
+        private Dictionary<MinionType, int> CreateWaveDesc(List<MinionType> minionTypes)
+        {
+            var resultDesc = new Dictionary<MinionType, int>();
+            
+            foreach (var type in minionTypes)
+            {
+                if (m_typeMultipliers.TryGetValue(type, out int multiplier))
+                {
+                    resultDesc.Add(type, m_currentWave * multiplier);
+                }
+            }
+
+            return resultDesc;
         }
     }
 }
