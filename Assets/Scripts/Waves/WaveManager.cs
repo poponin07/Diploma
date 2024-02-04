@@ -1,13 +1,11 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Minions;
+using TowerDefense;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
+using UnityEngine.InputSystem.HID;
 
-namespace TowerDefense
+namespace Waves
 {
-
     public class WaveManager : MonoBehaviour
     {
         [SerializeField] private WaveGr m_CurWave;
@@ -17,6 +15,9 @@ namespace TowerDefense
         [SerializeField] private List<WaveGr> m_waveGrs;
         [SerializeField] private List<MinionType> m_minions;
         [SerializeField] private List<BaseMinion> m_AllMinions;
+        [SerializeField] private UIManager m_UIManager;
+        [SerializeField] private PlayerData m_playerData;
+
 
         private void Start()
         {
@@ -26,10 +27,7 @@ namespace TowerDefense
 
         private void Update()
         {
-            if (m_AllMinions.Count <= 0)
-            {
-                Debug.Log("End wave");
-            }
+           
         }
 
         public void NextWave()
@@ -63,14 +61,19 @@ namespace TowerDefense
             ConfigurationMinions();
         }
 
-        private void MinionSpawn(BaseMinion minion)
+        public void MinionSpawn(BaseMinion minion)
         {
             m_AllMinions.Add(minion);
         }
         
-        private void MinionDespawn(BaseMinion minion)
+        public void MinionDespawn(BaseMinion minion)
         {
             m_AllMinions.Remove(minion);
+            
+            if (m_AllMinions.Count <= 0)
+            {
+                m_UIManager.EnableNextWaveButton();
+            }
         }
 
         private void ConfigurationMinions()
@@ -93,23 +96,21 @@ namespace TowerDefense
             {
                 case ZombiComponent:
                 {
-                    baseMinion.Damage = m_CurWave.addDamageZomby;
-                    baseMinion.Health = m_CurWave.addHealthZomby;
-                    baseMinion.Speed = m_CurWave.addMoveZomby;
-                    baseMinion.m_isElemental = m_CurWave.isElementalzomby;
-                    baseMinion.onSpawn += MinionSpawn;
-                    baseMinion.onDied += MinionDespawn;
+                    baseMinion.Damage = m_CurWave.damageZombie;
+                    baseMinion.Health = m_CurWave.healthZombie;
+                    baseMinion.Speed = m_CurWave.moveZombie;
+                    baseMinion.Score = m_CurWave.ScoreZombie;
+                    baseMinion.m_isElemental = m_CurWave.isElementalZombie;
                     break;
                 }
 
                 case SpiderComponent:
                 {
-                    baseMinion.Damage = m_CurWave.addDamageSpider;
-                    baseMinion.Health = m_CurWave.addHealthSpider;
+                    baseMinion.Damage = m_CurWave.damageSpider;
+                    baseMinion.Health = m_CurWave.healthSpider;
                     baseMinion.Speed = m_CurWave.moveSpider;
+                    baseMinion.Score = m_CurWave.ScoreSpider;
                     baseMinion.m_isElemental = m_CurWave.isElementalSpider;
-                    baseMinion.onSpawn += MinionSpawn;
-                    baseMinion.onDied += MinionDespawn;
                     break;
                 }
             }

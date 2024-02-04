@@ -95,7 +95,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1.4
+  m_Radius: 7
   m_Center: {x: 0, y: -0.56, z: 0}
 --- !u!1 &6315430772408577877
 GameObject:
@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Cooldown: 1
   m_CurCooldown: 0
   m_Target: {fileID: 0}
+  m_sphereCollider: {fileID: 1653724577}
   m_ProjectilePrefab: {fileID: 327244998656676491, guid: 2008eb3f081f73943984ba53e0d51f50,
     type: 3}
   m_range: 1.5
-  m_Targets: []
-  m_sphereCollider: {fileID: 1653724577}
+  m_enemyTransforms: []

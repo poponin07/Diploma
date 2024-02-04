@@ -62,22 +62,25 @@ namespace TowerDefense
                  m_Target = m_enemyTransforms.Last();
              }
 
-             if (m_Target == null)
+             if (m_Target == null || !m_Target.gameObject.activeSelf)
              {
                  return;
              }
+             
+             if (Vector3.Distance(gameObject.transform.position, m_Target.position) > m_range)
+             {
+                 m_enemyTransforms.Remove(m_Target);
+                 m_Target = null;
+                 return;
+             }
+             
 
              if (m_Target.gameObject.activeSelf == false || m_enemyTransforms.Count < 1)
              {
-                 if (Vector3.Distance(gameObject.transform.position, m_Target.position) > m_range)
-                 {
-                     m_enemyTransforms.Remove(m_Target);
-                     m_Target = null;
-                 }
-                 return;
+                 
              }
 
-             var spawnTransform = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
+             var spawnTransform = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
              ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, spawnTransform, Quaternion.identity).GetComponent<ProjectileComponent>();
              m_CurCooldown = m_Cooldown;
              projectile.m_target = m_Target.transform;

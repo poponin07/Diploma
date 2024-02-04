@@ -7,15 +7,12 @@ namespace TowerDefense
 {
     public class Killer : MonoBehaviour
     {
-        [SerializeField] private PoolComponent m_poolComponent;
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Minion")
             {
                 BaseMinion minion = other.gameObject.GetComponent<BaseMinion>();
-                minion.Despawn();
-                // m_dynamicPool.Release();
-                //m_poolComponent.Push(minion); 
+                minion.Despawn(true);
             }
             
         }

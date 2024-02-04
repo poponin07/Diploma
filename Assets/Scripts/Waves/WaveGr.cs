@@ -11,15 +11,17 @@ namespace TowerDefense
         public List<GameObject> minioms = new List<GameObject>();
 
         [Header("Grade zomby")] 
-        public bool isElementalzomby;
-        public float addHealthZomby;
-        public float addMoveZomby;
-        public float addDamageZomby;
+        public bool isElementalZombie;
+        public float healthZombie;
+        public float moveZombie;
+        public float damageZombie;
+        public int ScoreZombie;
         
         [Header("Grade spider")] 
         public bool isElementalSpider;
-        public float addHealthSpider;
+        public float healthSpider;
         public float moveSpider;
-        public float addDamageSpider;
+        public float damageSpider;
+        public int ScoreSpider;
     }
 }

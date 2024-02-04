@@ -1429,9 +1429,10 @@ MonoBehaviour:
   m_health: 200
   m_speed: 0
   m_damage: 0
+  m_score: 100
   m_element: 0
   m_type: 2
-  m_iselemental: 0
+  m_isElemental: 0
 --- !u!1 &5245346726286412734
 GameObject:
   m_ObjectHideFlags: 0

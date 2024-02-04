@@ -13,7 +13,11 @@ namespace TowerDefense
     {
         private InputController _input;
         private Ray ray;
-        public GameObject tower_1;
+        [SerializeField] private GameObject m_commonTower;
+        [SerializeField] private GameObject m_fireTower;
+        [SerializeField] private GameObject m_iceTower;
+        [SerializeField] private GameObject m_posionTower;
+        [SerializeField] private PlayerData m_playerData;
         private Plane plane = new Plane(Vector3.up, 0);
         public bool isBuild;
 
@@ -33,12 +37,19 @@ private void Awake()
         {
             isBuild = result;
         }
-
-        public void StartBuild()
-        {
-            StartCoroutine(TowerMagnetToCursor());
-        }
         
+        public void CheckCanBuildTower(GameObject tower)
+        {
+            GameObject newTower = Instantiate(tower, new Vector3(55, 5, 5), Quaternion.identity);
+            int towerPrice = newTower.GetComponent<TowerComponent>().Price;
+            if (!m_playerData.CheckCoins(towerPrice))
+            {
+                Destroy(newTower); 
+                return;
+            }
+            StartCoroutine(TowerMagnetToCursor(newTower));
+        }
+
         private void OnRayCastPlayer()
         {
             Camera _camera = Camera.main;
@@ -53,11 +64,11 @@ private void Awake()
             }
         }
 
-        IEnumerator TowerMagnetToCursor()
+        IEnumerator TowerMagnetToCursor(GameObject tower)
         {
             Camera _camera = Camera.main;
-            GameObject towerB = Instantiate(tower_1, new Vector3(55, 5, 5), Quaternion.identity);
-            BuildAgent buildAgent = towerB.GetComponent<BuildAgent>();
+            //GameObject towerB = Instantiate(tower, new Vector3(55, 5, 5), Quaternion.identity);
+            BuildAgent buildAgent = tower.GetComponent<BuildAgent>();
             buildAgent.Initialization(this);
             
             while(true)
@@ -66,8 +77,8 @@ private void Awake()
 
                 if (plane.Raycast(ray, out float distance))
                 {
-                    towerB.transform.position = ray.GetPoint(distance);
-                    ShootComponent shoot = towerB.GetComponent<ShootComponent>();
+                    tower.transform.position = ray.GetPoint(distance);
+                    ShootComponent shoot = tower.GetComponent<ShootComponent>();
 
                     if (Input.GetKeyDown(KeyCode.Mouse0) && isBuild)
                     {

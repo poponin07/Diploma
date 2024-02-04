@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using Minions;
 using UnityEngine;
+using Waves;
 using Debug = UnityEngine.Debug;
 
 namespace TowerDefense
@@ -17,7 +18,8 @@ namespace TowerDefense
         [SerializeField] private WaveManager m_waveManager;
         [SerializeField] private ZombiComponent m_zombieTemplate;
         [SerializeField] private SpiderComponent m_spiderTemplate;
-        
+        [SerializeField] private PlayerData m_playerData;
+
         private float m_spawnOffset;
         private int m_currentWave;
         private DynamicPool.DynamicPool m_dynamicPool = new DynamicPool.DynamicPool();
@@ -47,13 +49,12 @@ namespace TowerDefense
             StartCoroutine(SpawnOffset(waveEnemies));
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         IEnumerator SpawnOffset(List<BaseMinion> spawnList)
         {
             foreach (var minion in spawnList)
             {
                 yield return new WaitForSeconds(m_spawnOffset);
-                
-                //var poolMininon = 
                 InitMinionOnPosition(minion);
             }
         }
@@ -102,21 +103,32 @@ namespace TowerDefense
         private ZombiComponent CreateZombie()
         {
             var result = Instantiate(m_zombieTemplate, m_spawnPointTransform.position, Quaternion.identity);
+            BaseMinion baseMinion = result.GetComponent<BaseMinion>();
             result.gameObject.SetActive(false);
             result.onDied += OnDied;
+            baseMinion.onSpawn += m_waveManager.MinionSpawn;
+            baseMinion.onDied += m_waveManager.MinionDespawn;
+            baseMinion.onScore += m_playerData.SetScoreAndCoin;
             return result;
         }
 
         private SpiderComponent CreateSpider()
         {
             var result = Instantiate(m_spiderTemplate, m_spawnPointTransform.position, Quaternion.identity);
+            BaseMinion baseMinion = result.GetComponent<BaseMinion>();
             result.gameObject.SetActive(false);
             result.onDied += OnDied;
+            baseMinion.onSpawn += m_waveManager.MinionSpawn;
+            baseMinion.onDied += m_waveManager.MinionDespawn;
+            baseMinion.onScore += m_playerData.SetScoreAndCoin;
             return result;
         }
         
         private void OnDied(BaseMinion obj)
         {
+            obj.onSpawn -= m_waveManager.MinionSpawn;
+            obj.onDied -= m_waveManager.MinionDespawn;
+            obj.onScore -= m_playerData.SetScoreAndCoin;
             m_dynamicPool.Release(obj.Type, obj);
         }
         

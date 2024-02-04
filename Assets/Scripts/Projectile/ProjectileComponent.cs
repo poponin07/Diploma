@@ -14,7 +14,7 @@ public class ProjectileComponent : MonoBehaviour
 
     private void Start()
     {
-        m_damage = 10000;
+        m_damage = 44444;
     }
 
     private void FixedUpdate()
@@ -24,7 +24,7 @@ public class ProjectileComponent : MonoBehaviour
 
     private void Move()
     {
-        if (m_target == null)
+        if (m_target == null || !m_target.gameObject.activeSelf)
         {
             Destroy(gameObject);
         }
