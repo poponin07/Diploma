@@ -21,13 +21,22 @@ namespace TowerDefense
         
         [Range(0, 100)] 
         [SerializeField] private float m_range;
+        [SerializeField] private float m_damage;
+        [SerializeField] private float m_attackSpeed;
+        [SerializeField] private ElementType m_elementType;
 
         [SerializeField]private List<Transform> m_enemyTransforms = new List<Transform>();
+        
+        public float Damage { get => m_damage; set => m_damage = value; }
+        public float AttackSpeed { get => m_attackSpeed; set => m_attackSpeed = value; }
+        public float Range { get => m_range; set => m_range = value; }
+        public ElementType Elevental { get => m_elementType; set => m_elementType = value; }
 
         private void Start() 
          {
              m_sphereCollider.radius = m_range;
              m_CurCooldown = 1;
+             
          }
          
          private void FixedUpdate() 

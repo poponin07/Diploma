@@ -7,6 +7,7 @@ TagManager:
   - Path
   - MapObject
   - Minion
+  - Tower
   layers:
   - Default
   - TransparentFX

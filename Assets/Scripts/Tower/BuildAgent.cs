@@ -26,20 +26,18 @@ namespace TowerDefense
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Path")
+        if (other.gameObject.tag == "Path" ||  other.gameObject.tag == "Tower")
         {
             m_buildComponent.SetMayBuild(false);
-            Debug.Log("path");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Path")
+        if (other.gameObject.tag == "Path" ||  other.gameObject.tag == "Tower")
         {
                 m_buildComponent.SetMayBuild(true);
                 
-                Debug.Log("path");
         }
 
     }

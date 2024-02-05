@@ -57,7 +57,7 @@ private void Awake()
 
             if (Physics.Raycast(ray, out var hit))
             {
-               if (hit.collider.GetComponent<MinoinMoveController>())
+               if (hit.collider.tag == "Minion")
                 {
                     Debug.Log("Zomby");
                 }
@@ -67,7 +67,6 @@ private void Awake()
         IEnumerator TowerMagnetToCursor(GameObject tower)
         {
             Camera _camera = Camera.main;
-            //GameObject towerB = Instantiate(tower, new Vector3(55, 5, 5), Quaternion.identity);
             BuildAgent buildAgent = tower.GetComponent<BuildAgent>();
             buildAgent.Initialization(this);
             

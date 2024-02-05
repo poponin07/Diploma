@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: -44779336622501100}
   - component: {fileID: -5891982638343604060}
   - component: {fileID: 5915337674746824635}
+  - component: {fileID: -1514353739514329988}
   m_Layer: 0
   m_Name: Turret_2_Level_1_Base
-  m_TagString: Path
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +139,9 @@ MonoBehaviour:
   m_ProjectilePrefab: {fileID: 327244998656676491, guid: 2008eb3f081f73943984ba53e0d51f50,
     type: 3}
   m_range: 7
+  m_damage: 0
+  m_attackSpeed: 0
+  m_elementType: 0
   m_enemyTransforms: []
 --- !u!65 &-5891982638343604060
 BoxCollider:
@@ -165,6 +169,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_price: 100
+  m_damage: 0
+  m_attackSpeed: 0
+  m_range: 0
+  m_type: 0
+--- !u!114 &-1514353739514329988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420274166927340714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813074fee5767e941a492e4b8450c170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TowerComponent: {fileID: 0}
+  m_playerData: {fileID: 0}
+  m_damageGradeValue: 25
+  m_attackSpeedGradValue: 0.2
+  m_rangeGradeValue: 0.5
+  m_priceGradeValue: 25
+  m_startPrice: 25
+  m_priceIndexMax: 15
 --- !u!1 &7723784147011936899
 GameObject:
   m_ObjectHideFlags: 0
