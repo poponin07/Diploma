@@ -49,7 +49,7 @@ namespace TowerDefense
             StartCoroutine(SpawnOffset(waveEnemies));
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
+
         IEnumerator SpawnOffset(List<BaseMinion> spawnList)
         {
             foreach (var minion in spawnList)
@@ -122,14 +122,19 @@ namespace TowerDefense
             baseMinion.onDied += m_waveManager.MinionDespawn;
             baseMinion.onScore += m_playerData.SetScoreAndCoin;
             return result;
-        }
-        
-        private void OnDied(BaseMinion obj)
+        } 
+
+        private void OnSpawn(BaseMinion minion)
         {
-            obj.onSpawn -= m_waveManager.MinionSpawn;
-            obj.onDied -= m_waveManager.MinionDespawn;
-            obj.onScore -= m_playerData.SetScoreAndCoin;
-            m_dynamicPool.Release(obj.Type, obj);
+            
+        }
+        private void OnDied(BaseMinion minion)
+        {
+           //minion.onSpawn -= m_waveManager.MinionSpawn;
+            //minion.onDied -= m_waveManager.MinionDespawn;
+            //minion.onScore -= m_playerData.SetScoreAndCoin;
+            //minion.onDied -= OnDied;
+            m_dynamicPool.Release(minion.Type, minion);
         }
         
         private List<BaseMinion> GetWaveEnemies(Dictionary<MinionType, int> waveDesc)

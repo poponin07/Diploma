@@ -14,6 +14,7 @@ namespace TowerDefense
         [SerializeField] private int m_score;
         [SerializeField] private ElementType m_element;
         [SerializeField] private MinionType m_type;
+        [SerializeField] private SpawnComponent _spawnComponent;
         public bool m_isElemental;
         
         public Action<BaseMinion> onDied;
