@@ -13,6 +13,9 @@ namespace TowerDefense
     {
         private InputController _input;
         private Ray ray;
+
+        [SerializeField] private UIUpgradeWindow uiUpgradeTowerComponent;
+        
         [SerializeField] private GameObject m_commonTower;
         [SerializeField] private GameObject m_fireTower;
         [SerializeField] private GameObject m_iceTower;
@@ -30,7 +33,7 @@ private void Awake()
 
         private void Start()
         {
-            _input.Player.ClickForReycast.canceled += context =>  OnRayCastPlayer();
+           // _input.Player.ClickForReycast.canceled += context =>  OnRayCastPlayer();
         }
 
         public void SetMayBuild(bool result)
@@ -81,8 +84,10 @@ private void Awake()
 
                     if (Input.GetKeyDown(KeyCode.Mouse0) && isBuild)
                     {
+                        var towerObj = buildAgent.gameObject;
                         buildAgent.enabled = false;
-                        buildAgent.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                        towerObj.GetComponent<BoxCollider>().isTrigger = true;
+                        towerObj.GetComponent<TowerComponent>().upgradeWindow = uiUpgradeTowerComponent;
                         buildAgent.AfterBuildTodtr();
                         shoot.enabled = true;
                         break;

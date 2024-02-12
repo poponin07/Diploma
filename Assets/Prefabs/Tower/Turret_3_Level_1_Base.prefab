@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2814481935539789954}
   - component: {fileID: -5598362933028670155}
   - component: {fileID: -5000717851251453470}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turret_3_Level_1_Base
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -173,10 +173,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_price: 100
-  m_damage: 0
+  m_damage: 100
   m_attackSpeed: 0
   m_range: 0
-  m_type: 0
+  m_type: 2
 --- !u!114 &-5000717851251453470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813074fee5767e941a492e4b8450c170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TowerComponent: {fileID: 0}
+  m_TowerComponent: {fileID: -5598362933028670155}
   m_playerData: {fileID: 0}
   m_damageGradeValue: 25
   m_attackSpeedGradValue: 0.2
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 5359814660321225187}
   - component: {fileID: 44457279914001280}
   - component: {fileID: 7782011421983397338}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Turret_3_Level_1_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

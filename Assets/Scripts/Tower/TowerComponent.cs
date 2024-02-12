@@ -11,6 +11,8 @@ public class TowerComponent : MonoBehaviour
    [SerializeField]private float m_attackSpeed;
    [SerializeField]private float m_range;
    [SerializeField]private ElementType m_type;
+
+   public UIUpgradeWindow upgradeWindow;
    
 
    public float Damage { get => m_damage; set => m_damage = value; }

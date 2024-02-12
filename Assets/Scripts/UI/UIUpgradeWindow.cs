@@ -14,7 +14,14 @@ public class UIUpgradeWindow : MonoBehaviour
    [SerializeField] private TextMeshProUGUI m_damagePriceText;
    [SerializeField] private TextMeshProUGUI m_attackSpeedPriceText;
    [SerializeField] private TextMeshProUGUI m_rangePriceText;
+
+   public void Show()
+   {
+      root.SetActive(true);
+   }
    
-   
-   
+   public void Hide()
+   {
+      root.SetActive(false);
+   }
 }

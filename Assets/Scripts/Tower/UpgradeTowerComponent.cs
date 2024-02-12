@@ -6,6 +6,7 @@ using UnityEngine;
 public class UpgradeTowerComponent : MonoBehaviour
 {
     public TowerComponent m_TowerComponent;
+    public UIUpgradeWindow upgradeTowerComponent;
     
     private int m_damageGradeIndex = 0;
     private int m_attackSpeedGradIndex = 0;
@@ -22,7 +23,7 @@ public class UpgradeTowerComponent : MonoBehaviour
     [SerializeField] private int m_startPrice = 25;
     [SerializeField] private int m_priceIndexMax = 15;
     
-
+    
     public void UpgradeDamage()
     {
         
