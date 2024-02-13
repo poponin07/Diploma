@@ -174,9 +174,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_price: 100
   m_damage: 100
-  m_attackSpeed: 0
-  m_range: 0
+  m_attackSpeed: 1.5
+  m_range: 7
   m_type: 2
+  uiUpgradeWindow: {fileID: 0}
+  upgradeTowerComponent: {fileID: -5000717851251453470}
 --- !u!114 &-5000717851251453470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TowerComponent: {fileID: -5598362933028670155}
+  uiUpgradeTowerComponent: {fileID: 0}
   m_playerData: {fileID: 0}
   m_damageGradeValue: 25
   m_attackSpeedGradValue: 0.2

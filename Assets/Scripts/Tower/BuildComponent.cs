@@ -15,6 +15,7 @@ namespace TowerDefense
         private Ray ray;
 
         [SerializeField] private UIUpgradeWindow uiUpgradeTowerComponent;
+        [SerializeField] UpgradeTowerComponent m_upgradeTowerComponent;
         
         [SerializeField] private GameObject m_commonTower;
         [SerializeField] private GameObject m_fireTower;
@@ -44,7 +45,11 @@ private void Awake()
         public void CheckCanBuildTower(GameObject tower)
         {
             GameObject newTower = Instantiate(tower, new Vector3(55, 5, 5), Quaternion.identity);
-            int towerPrice = newTower.GetComponent<TowerComponent>().Price;
+            TowerComponent towerComponent = newTower.GetComponent<TowerComponent>();
+            towerComponent.uiUpgradeWindow = uiUpgradeTowerComponent;
+            towerComponent.upgradeTowerComponent.m_playerData = m_playerData;
+
+            int towerPrice = towerComponent.Price;
             if (!m_playerData.CheckCoins(towerPrice))
             {
                 Destroy(newTower); 
@@ -85,9 +90,10 @@ private void Awake()
                     if (Input.GetKeyDown(KeyCode.Mouse0) && isBuild)
                     {
                         var towerObj = buildAgent.gameObject;
+                        //TowerComponent towerComponent = towerObj.GetComponent<TowerComponent>();
                         buildAgent.enabled = false;
                         towerObj.GetComponent<BoxCollider>().isTrigger = true;
-                        towerObj.GetComponent<TowerComponent>().upgradeWindow = uiUpgradeTowerComponent;
+                        
                         buildAgent.AfterBuildTodtr();
                         shoot.enabled = true;
                         break;

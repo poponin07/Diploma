@@ -19,7 +19,6 @@ namespace TowerDefense
         [Header("Prefabs")]
         [SerializeField] private GameObject m_ProjectilePrefab;
         
-        [Range(0, 100)] 
         [SerializeField] private float m_range;
         [SerializeField] private float m_damage;
         [SerializeField] private float m_attackSpeed;
@@ -34,15 +33,12 @@ namespace TowerDefense
 
         private void Start() 
          {
-             m_sphereCollider.radius = m_range;
-             m_CurCooldown = 1;
-             
+             m_CurCooldown = m_attackSpeed;
+
          }
          
          private void FixedUpdate() 
          {
-             
-         
              if (m_CurCooldown > 0 && !m_CanShoot)
              {
                  m_CurCooldown -= Time.deltaTime;
@@ -56,6 +52,18 @@ namespace TowerDefense
                  Shoot(); 
              }
          }
+
+         public void SetNewParams(float damage, float attackSpeed, float range)
+         {
+             m_damage = damage;
+             
+             m_Cooldown = m_attackSpeed = attackSpeed;
+
+             m_range = range;
+             m_sphereCollider.radius = m_range;
+
+         }
+         
          private void isCanShoot()
          {
              if (m_CurCooldown <= 0 )

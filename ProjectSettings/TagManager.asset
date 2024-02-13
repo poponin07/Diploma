@@ -8,6 +8,7 @@ TagManager:
   - MapObject
   - Minion
   - Tower
+  - UI
   layers:
   - Default
   - TransparentFX

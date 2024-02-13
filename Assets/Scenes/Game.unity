@@ -1467,7 +1467,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 154125781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963194234}
+        m_TargetAssemblyTypeName: TowerDefense.UpgradeScript, Assembly-CSharp
+        m_MethodName: UpDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &154125781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3181,7 +3193,7 @@ GameObject:
   - component: {fileID: 393930983}
   m_Layer: 5
   m_Name: NextWaveButton
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4666,7 +4678,7 @@ GameObject:
   - component: {fileID: 560705936}
   m_Layer: 5
   m_Name: GameOver
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6894,7 +6906,7 @@ GameObject:
   - component: {fileID: 734776242}
   m_Layer: 5
   m_Name: CoinPanel
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7485,7 +7497,7 @@ GameObject:
   - component: {fileID: 842749898}
   m_Layer: 5
   m_Name: BestScore
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8693,6 +8705,7 @@ GameObject:
   - component: {fileID: 963194230}
   - component: {fileID: 963194232}
   - component: {fileID: 963194233}
+  - component: {fileID: 963194234}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8779,6 +8792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiUpgradeTowerComponent: {fileID: 1243691470}
+  m_upgradeTowerComponent: {fileID: 0}
   m_commonTower: {fileID: 7842888822707930003, guid: 14efdefcbe1ca4d439582277f5d1ea41,
     type: 3}
   m_fireTower: {fileID: 3420274166927340714, guid: 0e01b6013644f5345853dfdbd9c2da4d,
@@ -8863,6 +8877,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5330279ad55803d41b80e5bd9f3a3781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_upgradeScript: {fileID: 963194234}
+--- !u!114 &963194234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7895c9f1d750402289eb96d44361451f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_selectedUpgrade: {fileID: 0}
 --- !u!1 &966293580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6248438522094404593, guid: 8f75d7d8649593341822be19369f95fb,
@@ -10286,7 +10314,7 @@ GameObject:
   - component: {fileID: 1132945336}
   m_Layer: 5
   m_Name: BuildPanel
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11068,7 +11096,7 @@ GameObject:
   - component: {fileID: 1243691470}
   m_Layer: 5
   m_Name: UpdateWindow
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11110,9 +11138,9 @@ MonoBehaviour:
   damageButton: {fileID: 154125780}
   attackSpeedButton: {fileID: 1317220493}
   rangeSpeedButton: {fileID: 1680985867}
-  m_damagePriceText: {fileID: 1593815536}
-  m_attackSpeedPriceText: {fileID: 606141059}
-  m_rangePriceText: {fileID: 115183263}
+  m_damagePriceText: {fileID: 720975695}
+  m_attackSpeedPriceText: {fileID: 890908824}
+  m_rangePriceText: {fileID: 1630931346}
 --- !u!1 &1263080826
 GameObject:
   m_ObjectHideFlags: 0
@@ -11734,7 +11762,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1317220494}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963194234}
+        m_TargetAssemblyTypeName: TowerDefense.UpgradeScript, Assembly-CSharp
+        m_MethodName: UpAttackSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1317220494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12429,6 +12469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiUpgradeTowerComponent: {fileID: 1243691470}
+  m_upgradeTowerComponent: {fileID: 0}
   m_commonTower: {fileID: 7842888822707930003, guid: 14efdefcbe1ca4d439582277f5d1ea41,
     type: 3}
   m_fireTower: {fileID: 3420274166927340714, guid: 0e01b6013644f5345853dfdbd9c2da4d,
@@ -15143,7 +15184,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1680985868}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 963194234}
+        m_TargetAssemblyTypeName: TowerDefense.UpgradeScript, Assembly-CSharp
+        m_MethodName: UpRange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1680985868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16848,7 +16901,7 @@ GameObject:
   - component: {fileID: 1885801784}
   m_Layer: 5
   m_Name: Score
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17625,7 +17678,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1962069891}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1243691470}
+        m_TargetAssemblyTypeName: UIUpgradeWindow, Assembly-CSharp
+        m_MethodName: Hide
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1962069891
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ namespace TowerDefense
 
         private void Start()
         {
-            m_coin = 200;
+            m_coin = 200000;
             m_coinComponent.UpdateUICoin(m_coin);
         }
 

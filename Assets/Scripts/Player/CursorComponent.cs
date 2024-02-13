@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace TowerDefense
 {
     public class CursorComponent : MonoBehaviour
     {
+        [SerializeField] private UpgradeScript m_upgradeScript;
         private InputController _input;
         private Ray ray;
         private const string Tower_Tag = "Tower";
@@ -15,9 +17,12 @@ namespace TowerDefense
         private TowerComponent m_towerComponent = null;
         private UpgradeTowerComponent m_upgradeTowerComponent;
 
-        private int m_layerNumber = 6;
-        private int m_layerMask;
-
+        private int m_layerTowerNumber = 6;
+        private int m_layerUINumber = 5;
+        private int m_layerTowerMask;
+        private int m_layerUIMask;
+        
+        
         private void Awake()
         {
             _input = new InputController();
@@ -27,7 +32,8 @@ namespace TowerDefense
         private void Start()
         {
             _input.Player.ClickForReycast.canceled += context =>  OnRayCastTower();
-            m_layerMask = 1 << m_layerNumber;
+            m_layerTowerMask = 1 << m_layerTowerNumber;
+            m_layerUIMask = 1 << m_layerUINumber;
         }
 
         private void OnRayCastTower()
@@ -35,27 +41,28 @@ namespace TowerDefense
             Camera _camera = Camera.main;
             ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-            if (Physics.Raycast(ray, out var hit, Mathf.Infinity,m_layerMask))
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity,m_layerTowerMask))
             {
                 if (hit.collider.gameObject.tag.Equals(Tower_Tag))
                 {
                     TowerComponent component = hit.collider.gameObject.GetComponent<TowerComponent>();
-                    
-                    //m_upgradeTowerComponent = hit.collider.gameObject.GetComponent<UpgradeTowerComponent>();
-                   // m_upgradeTowerComponent.upgradeTowerComponent.Show();
-                    
+
                     if (component != m_towerComponent)
                     {
                         m_towerComponent = component;
-                        hit.collider.gameObject.GetComponent<TowerComponent>().upgradeWindow.Show();
-                        //m_upgradeTowerComponent.upgradeTowerComponent.Show();
+                        m_upgradeScript.m_selectedUpgrade = m_towerComponent.upgradeTowerComponent;
+                        hit.collider.gameObject.GetComponent<TowerComponent>().uiUpgradeWindow.Show();
                     }
-                    
                 }
             }
             else if(m_towerComponent != null)
             {
-                m_towerComponent.GetComponent<TowerComponent>().upgradeWindow.Hide();
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return;
+                }
+                m_towerComponent.GetComponent<TowerComponent>().uiUpgradeWindow.Hide();
                 m_towerComponent = null;
             }
 

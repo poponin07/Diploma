@@ -238,7 +238,7 @@ MonoBehaviour:
   m_sphereCollider: {fileID: 8169628510919272675}
   m_ProjectilePrefab: {fileID: 327244998656676491, guid: 2008eb3f081f73943984ba53e0d51f50,
     type: 3}
-  m_range: 7
+  m_range: 0
   m_damage: 0
   m_attackSpeed: 0
   m_elementType: 0
@@ -270,9 +270,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_price: 50
   m_damage: 100
-  m_attackSpeed: 1
-  m_range: 0
+  m_attackSpeed: 1.5
+  m_range: 7
   m_type: 0
+  uiUpgradeWindow: {fileID: 0}
+  upgradeTowerComponent: {fileID: 3205281540806590671}
 --- !u!114 &3205281540806590671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,10 +288,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TowerComponent: {fileID: 140863490500603544}
+  uiUpgradeTowerComponent: {fileID: 0}
   m_playerData: {fileID: 0}
   m_damageGradeValue: 25
-  m_attackSpeedGradValue: 0.2
-  m_rangeGradeValue: 0.5
+  m_attackSpeedGradValue: 0.05
+  m_rangeGradeValue: 0.3
   m_priceGradeValue: 25
   m_startPrice: 25
   m_priceIndexMax: 15
