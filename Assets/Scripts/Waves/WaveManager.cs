@@ -25,10 +25,6 @@ namespace Waves
             ConfigurationMinions();
         }
 
-        private void Update()
-        {
-           
-        }
 
         public void NextWave()
         {

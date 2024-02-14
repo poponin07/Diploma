@@ -34,7 +34,6 @@ namespace TowerDefense
         private void Start() 
          {
              m_CurCooldown = m_attackSpeed;
-
          }
          
          private void FixedUpdate() 
@@ -84,21 +83,17 @@ namespace TowerDefense
                  return;
              }
              
-             if (Vector3.Distance(gameObject.transform.position, m_Target.position) > m_range)
+             if (Vector3.Distance(gameObject.transform.position, m_Target.position) > m_range || m_Target.gameObject.activeSelf == false)
              {
                  m_enemyTransforms.Remove(m_Target);
                  m_Target = null;
                  return;
              }
              
-
-             if (m_Target.gameObject.activeSelf == false || m_enemyTransforms.Count < 1)
-             {
-                 
-             }
-
+             
              var spawnTransform = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
              ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, spawnTransform, Quaternion.identity).GetComponent<ProjectileComponent>();
+             projectile.SetDamage(m_damage);
              m_CurCooldown = m_Cooldown;
              projectile.m_target = m_Target.transform;
              m_CanShoot = false; 

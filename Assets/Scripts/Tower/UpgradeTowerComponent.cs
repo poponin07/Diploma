@@ -33,8 +33,6 @@ public class UpgradeTowerComponent : MonoBehaviour
 
     public void UpgradeDamage()
     {
-        
-        
         if (m_damageGradeIndex >= m_priceIndexMax || !m_playerData.CheckCoins(m_priceGradeValue))
         {
             return;
@@ -43,7 +41,7 @@ public class UpgradeTowerComponent : MonoBehaviour
         m_TowerComponent.Damage += m_damageGradeValue;
         m_priceGradeValue = m_startPrice + (m_startPrice * m_priceIndex);
         uiUpgradeTowerComponent = m_TowerComponent.uiUpgradeWindow;
-        uiUpgradeTowerComponent.SetSetNewPrice(m_priceGradeValue);
+        uiUpgradeTowerComponent.SetNewPrice(m_priceGradeValue);
         m_TowerComponent.SetTowerParams();
         m_damageGradeIndex++;
         m_priceIndex++;
@@ -59,7 +57,7 @@ public class UpgradeTowerComponent : MonoBehaviour
         m_TowerComponent.AttackSpead -= m_attackSpeedGradValue;
         m_priceGradeValue = m_startPrice + (m_startPrice * m_priceIndex);
         uiUpgradeTowerComponent = m_TowerComponent.uiUpgradeWindow;
-        uiUpgradeTowerComponent.SetSetNewPrice(m_priceGradeValue);
+        uiUpgradeTowerComponent.SetNewPrice(m_priceGradeValue);
         m_TowerComponent.SetTowerParams();
         m_attackSpeedGradIndex++;
         m_priceIndex++;
@@ -75,11 +73,15 @@ public class UpgradeTowerComponent : MonoBehaviour
         m_TowerComponent.Range += m_rangeGradeValue;
         m_priceGradeValue = m_startPrice + (m_startPrice * m_priceIndex);
         uiUpgradeTowerComponent = m_TowerComponent.uiUpgradeWindow;
-        uiUpgradeTowerComponent.SetSetNewPrice(m_priceGradeValue);
+        uiUpgradeTowerComponent.SetNewPrice(m_priceGradeValue);
         m_TowerComponent.SetTowerParams();
         m_rangeGradeIndex++;
         m_priceIndex++;
     }
-    
+
+    public void RefreshUI()
+    {
+        uiUpgradeTowerComponent.SetNewPrice(m_priceGradeValue);
+    }
 
 }

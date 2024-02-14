@@ -9,19 +9,21 @@ namespace TowerDefense
 public class ProjectileComponent : MonoBehaviour
 {
    [SerializeField] private float m_speed;
-    private float m_damage;
-    public Transform m_target;
+   [SerializeField] private ElementType m_type;
+   [SerializeField] private float m_damage;
+    
+   public Transform m_target;
 
-    private void Start()
-    {
-        m_damage = 44444;
-    }
-
-    private void FixedUpdate()
+   private void FixedUpdate()
     {
         Move();
     }
 
+    public void SetDamage(float damage)
+    {
+        m_damage = damage;
+    }
+    
     private void Move()
     {
         if (m_target == null || !m_target.gameObject.activeSelf)
@@ -37,7 +39,9 @@ public class ProjectileComponent : MonoBehaviour
         Debug.Log(other.gameObject.name);
         if (other.gameObject.tag == "Minion")
         {
-            other.GetComponent<BaseMinion>().GetDamage(m_damage);
+            BaseMinion minion = other.GetComponent<BaseMinion>();
+            minion.GetDamage(m_damage, m_type);
+            
             Destroy(gameObject);
         }
     }

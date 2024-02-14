@@ -26,9 +26,9 @@ public class UIUpgradeWindow : MonoBehaviour
    {
       root.SetActive(true);
    }
-   
-   
-   public void SetSetNewPrice(int price)
+
+
+   public void SetNewPrice(int price)
    {
       m_damagePriceText.text = m_attackSpeedPriceText.text = m_rangePriceText.text = price.ToString();
    

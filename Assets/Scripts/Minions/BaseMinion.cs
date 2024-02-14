@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Security.Cryptography;
 using Minions;
 using TowerDefense.DynamicPool;
 using UnityEngine.Events;
 using UnityEngine;
+using Random = System.Random;
 
 namespace TowerDefense
 {
-    public class BaseMinion : MonoBehaviour, IGetDamage, IBaseMinion, IPooledObject
+    public class BaseMinion : MonoBehaviour, IBaseMinion, IPooledObject
     {
         [SerializeField] private float m_health;
         [SerializeField] private float m_speed;
@@ -14,13 +16,15 @@ namespace TowerDefense
         [SerializeField] private int m_score;
         [SerializeField] private ElementType m_element;
         [SerializeField] private MinionType m_type;
-        [SerializeField] private SpawnComponent _spawnComponent;
+        //[SerializeField] private SpawnComponent _spawnComponent;
         public bool m_isElemental;
+        
         
         public Action<BaseMinion> onDied;
         public Action<BaseMinion> onSpawn;
         public Action<int> onScore;
 
+        
         public float Health { get => m_health; set => m_health = value; }
         public int Score { get => m_score; set => m_score = value; }
         public float Speed { get => m_speed; set => m_speed = value; }
@@ -28,10 +32,19 @@ namespace TowerDefense
         public MinionType Type { get => m_type; set => m_type = value; }
         public ElementType Element { get => m_element; set => m_element = value; }
 
-        public void GetDamage(float damage)
+
+        //RANDOM
+        private void Start()
         {
-            Health -= damage; 
-            //Despawn(false);
+            
+        }
+
+        public void GetDamage(float damage, ElementType projectileType)
+        {
+            float multiplierDamage = CalculationElementalDamage.CalculationDamage(Element, projectileType);
+            
+            Health -= damage * multiplierDamage;
+            
             if (Health <= 0)
             {
                 Despawn(false);

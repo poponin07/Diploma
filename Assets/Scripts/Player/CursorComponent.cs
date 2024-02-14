@@ -18,11 +18,9 @@ namespace TowerDefense
         private UpgradeTowerComponent m_upgradeTowerComponent;
 
         private int m_layerTowerNumber = 6;
-        private int m_layerUINumber = 5;
         private int m_layerTowerMask;
-        private int m_layerUIMask;
-        
-        
+
+
         private void Awake()
         {
             _input = new InputController();
@@ -33,7 +31,6 @@ namespace TowerDefense
         {
             _input.Player.ClickForReycast.canceled += context =>  OnRayCastTower();
             m_layerTowerMask = 1 << m_layerTowerNumber;
-            m_layerUIMask = 1 << m_layerUINumber;
         }
 
         private void OnRayCastTower()
@@ -52,6 +49,7 @@ namespace TowerDefense
                     {
                         m_towerComponent = component;
                         m_upgradeScript.m_selectedUpgrade = m_towerComponent.upgradeTowerComponent;
+                        m_towerComponent.upgradeTowerComponent.RefreshUI();
                         hit.collider.gameObject.GetComponent<TowerComponent>().uiUpgradeWindow.Show();
                     }
                 }
