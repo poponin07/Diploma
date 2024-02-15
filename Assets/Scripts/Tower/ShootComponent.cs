@@ -52,7 +52,7 @@ namespace TowerDefense
              }
          }
 
-         public void SetNewParams(float damage, float attackSpeed, float range)
+         public void SetNewParams(float damage, float attackSpeed, float range, ElementType elementType)
          {
              m_damage = damage;
              
@@ -60,6 +60,8 @@ namespace TowerDefense
 
              m_range = range;
              m_sphereCollider.radius = m_range;
+
+             m_elementType = elementType;
 
          }
          
@@ -93,7 +95,7 @@ namespace TowerDefense
              
              var spawnTransform = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
              ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, spawnTransform, Quaternion.identity).GetComponent<ProjectileComponent>();
-             projectile.SetDamage(m_damage);
+             projectile.SetDamage(m_damage, m_elementType);
              m_CurCooldown = m_Cooldown;
              projectile.m_target = m_Target.transform;
              m_CanShoot = false; 

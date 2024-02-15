@@ -13,7 +13,7 @@ public class MinionSpawner : MonoBehaviour
    private void Awake()
    {
       m_spawnBreak = 3f;
-      SpawnEnemy();
+      //SpawnEnemy();
    }
 
 

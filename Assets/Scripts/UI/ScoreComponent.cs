@@ -16,6 +16,13 @@ namespace Score
         [SerializeField] private TextMeshProUGUI m_scoreText;
         [SerializeField] private TextMeshProUGUI m_bestScoreText;
 
+        private void Start()
+        {
+            m_bestScore = PlayerPrefs.GetInt("BestScore");
+            m_bestScoreText.text = "Best score: " + m_bestScore;
+            Debug.Log(m_bestScore);
+        }
+
         public void UpdateScore(int score)
         { 
             m_score += score;
@@ -27,5 +34,16 @@ namespace Score
                 m_bestScoreText.text = "Best score: " + m_bestScore;
             }
         }
+
+        public int GetBestScore()
+        {
+          return  m_bestScore;
+        }
+        
+        public int GetScore()
+        {
+            return  m_score;
+        }
+        
     }
 }

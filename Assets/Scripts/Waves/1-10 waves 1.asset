@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minioms:
   - {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e, type: 3}
-  isElementalZombie: 0
+  isElementalZombie: 1
   healthZombie: 100
   moveZombie: 0
   damageZombie: 0
   ScoreZombie: 10
   isElementalSpider: 0
-  healthSpider: 200
+  healthSpider: 0
   moveSpider: 0
   damageSpider: 0
-  ScoreSpider: 25
+  ScoreSpider: 0

@@ -36,7 +36,7 @@ namespace Waves
 
         private void CheckWave()
         {
-            if (m_indexWave == 2)
+            if (m_indexWave == 10)
             {
                 ChangeWaveParams();
             }
@@ -110,7 +110,7 @@ namespace Waves
                     break;
                 }
             }
-
+            baseMinion.Element = ElementType.None;
             return baseMinion;
         }
     }

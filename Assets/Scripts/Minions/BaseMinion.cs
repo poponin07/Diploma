@@ -4,7 +4,8 @@ using Minions;
 using TowerDefense.DynamicPool;
 using UnityEngine.Events;
 using UnityEngine;
-using Random = System.Random;
+using Random = UnityEngine.Random;
+
 
 namespace TowerDefense
 {
@@ -16,6 +17,12 @@ namespace TowerDefense
         [SerializeField] private int m_score;
         [SerializeField] private ElementType m_element;
         [SerializeField] private MinionType m_type;
+
+        [SerializeField] private Material m_commonMaterial;
+        [SerializeField] private Material m_fireMaterial;
+        [SerializeField] private Material m_iceMaterial;
+        [SerializeField] private Material m_poisonMaterial;
+        
         //[SerializeField] private SpawnComponent _spawnComponent;
         public bool m_isElemental;
         
@@ -32,17 +39,46 @@ namespace TowerDefense
         public MinionType Type { get => m_type; set => m_type = value; }
         public ElementType Element { get => m_element; set => m_element = value; }
 
+        [SerializeField] private MeshRenderer m_renderer;
+
 
         //RANDOM
-        private void Start()
+        private void Awake()
         {
-            
+            SetRandomElement();
+        }
+
+        private void SetRandomElement()
+        {
+            if (m_isElemental)
+            {
+                int randomIndex = Random.Range(0, 5);
+                m_element = (ElementType)randomIndex;
+
+                switch (m_element)
+                {
+                    case ElementType.None:
+                        m_renderer.material = m_commonMaterial;
+                        break;
+                    
+                    case ElementType.Fire:
+                        m_renderer.material = m_fireMaterial;
+                        break;
+                    
+                    case ElementType.Ice:
+                        m_renderer.material = m_iceMaterial;
+                        break;
+                    
+                    case ElementType.Poison:
+                        m_renderer.material = m_poisonMaterial;
+                        break;
+                }
+            }
         }
 
         public void GetDamage(float damage, ElementType projectileType)
         {
             float multiplierDamage = CalculationElementalDamage.CalculationDamage(Element, projectileType);
-            
             Health -= damage * multiplierDamage;
             
             if (Health <= 0)
@@ -59,6 +95,7 @@ namespace TowerDefense
                 onScore?.Invoke(Score); 
             }
             onDied.Invoke(this);
+            transform.position = new Vector3(50, 50, 50);
         }
 
         public void Spawn()

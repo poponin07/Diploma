@@ -130,10 +130,10 @@ namespace TowerDefense
         }
         private void OnDied(BaseMinion minion)
         {
-           //minion.onSpawn -= m_waveManager.MinionSpawn;
-            //minion.onDied -= m_waveManager.MinionDespawn;
-            //minion.onScore -= m_playerData.SetScoreAndCoin;
-            //minion.onDied -= OnDied;
+           /*minion.onSpawn -= m_waveManager.MinionSpawn;
+            minion.onDied -= m_waveManager.MinionDespawn;
+            minion.onScore -= m_playerData.SetScoreAndCoin;
+            minion.onDied -= OnDied;*/
             m_dynamicPool.Release(minion.Type, minion);
         }
         

@@ -46,7 +46,7 @@ public class TowerComponent : MonoBehaviour
    }
    public void SetTowerParams()
    {
-      m_shootComponent.SetNewParams(m_damage, m_attackSpeed, m_range);
+      m_shootComponent.SetNewParams(m_damage, m_attackSpeed, m_range, m_type);
       
    }
    

@@ -8,9 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-    [SerializeField] private Button m_startButton;
-    
     [SerializeField] private TextMeshProUGUI m_bestScoreText;
+
+    private void Start()
+    {
+        m_bestScoreText.text = "Best score: " + PlayerPrefs.GetInt("BestScore");
+    }
 
     public void StartGame()
     {

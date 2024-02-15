@@ -19,9 +19,10 @@ public class ProjectileComponent : MonoBehaviour
         Move();
     }
 
-    public void SetDamage(float damage)
+    public void SetDamage(float damage, ElementType elementType)
     {
         m_damage = damage;
+        m_type = elementType;
     }
     
     private void Move()
@@ -36,7 +37,6 @@ public class ProjectileComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
         if (other.gameObject.tag == "Minion")
         {
             BaseMinion minion = other.GetComponent<BaseMinion>();

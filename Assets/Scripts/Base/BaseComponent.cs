@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Score;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ namespace TowerDefense
     {
         [SerializeField] private int m_health;
         [SerializeField] private UIBaseComponent m_uiBaseComponent;
+        [SerializeField] private ScoreComponent m_scoreComponent;
+        [SerializeField]private GameObject m_gameOverPanel;
 
         private void Start()
         {
@@ -24,10 +27,13 @@ namespace TowerDefense
                 BaseMinion minion = other.gameObject.GetComponent<BaseMinion>();
                 minion.Despawn(true);
                 m_health -= 99;
+                m_health --;
+                
                 if (m_health <= 0)
                 {
                     m_health = 0;
-                    //SceneManager.LoadScene(sceneBuildIndex: 0);
+                    m_gameOverPanel.SetActive(true);
+                    SaveComponent.SaveGame(m_scoreComponent.GetBestScore());
                 }
                 m_uiBaseComponent.SetUIBase(m_health);
             }
