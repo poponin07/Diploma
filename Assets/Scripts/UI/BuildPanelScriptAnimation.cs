@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class BuildPanelScriptAnimation : MonoBehaviour
@@ -12,8 +8,6 @@ public class BuildPanelScriptAnimation : MonoBehaviour
     private void Start()
     {
         m_animator = GetComponent<Animator>();
-        
-        
     }
 
     public void Show()

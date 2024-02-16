@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Minions;
 using UnityEngine;
 using Waves;
-using Debug = UnityEngine.Debug;
 
 namespace TowerDefense
 {
@@ -18,6 +16,7 @@ namespace TowerDefense
         [SerializeField] private WaveManager m_waveManager;
         [SerializeField] private ZombiComponent m_zombieTemplate;
         [SerializeField] private SpiderComponent m_spiderTemplate;
+        [SerializeField] private OrcComponent m_orcTemplate;
         [SerializeField] private PlayerData m_playerData;
 
         private float m_spawnOffset;
@@ -26,8 +25,9 @@ namespace TowerDefense
 
         private Dictionary<MinionType, int> m_typeMultipliers = new Dictionary<MinionType, int>()
         {
-            {MinionType.Zomby, 2},
-            {MinionType.Spider, 1}
+            {MinionType.Zomby, 3},
+            {MinionType.Spider, 1},
+            {MinionType.Orc, 1}
         };
         
         private Coroutine spawnCor;
@@ -37,7 +37,6 @@ namespace TowerDefense
             var myArray = path.GetComponentsInChildren<Transform>();
             m_path = myArray.ToList();
             m_path.Remove(m_path[0]);
-
             m_spawnOffset = 0.2f;
         }
         
@@ -85,6 +84,10 @@ namespace TowerDefense
                 case MinionType.Spider:
                     createMethod = CreateSpider;
                     break;
+                
+                case MinionType.Orc:
+                    createMethod = CreateOrc;
+                    break;
             }
 
             if (createMethod == null)
@@ -123,6 +126,18 @@ namespace TowerDefense
             baseMinion.onScore += m_playerData.SetScoreAndCoin;
             return result;
         } 
+        
+        private OrcComponent CreateOrc()
+        {
+            var result = Instantiate(m_orcTemplate, m_spawnPointTransform.position, Quaternion.identity);
+            BaseMinion baseMinion = result.GetComponent<BaseMinion>();
+            result.gameObject.SetActive(false);
+            result.onDied += OnDied;
+            baseMinion.onSpawn += m_waveManager.MinionSpawn;
+            baseMinion.onDied += m_waveManager.MinionDespawn;
+            baseMinion.onScore += m_playerData.SetScoreAndCoin;
+            return result;
+        } 
 
         private void OnSpawn(BaseMinion minion)
         {
@@ -130,10 +145,6 @@ namespace TowerDefense
         }
         private void OnDied(BaseMinion minion)
         {
-           /*minion.onSpawn -= m_waveManager.MinionSpawn;
-            minion.onDied -= m_waveManager.MinionDespawn;
-            minion.onScore -= m_playerData.SetScoreAndCoin;
-            minion.onDied -= OnDied;*/
             m_dynamicPool.Release(minion.Type, minion);
         }
         

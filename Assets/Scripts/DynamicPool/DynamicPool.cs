@@ -5,7 +5,7 @@ namespace TowerDefense.DynamicPool
 {
     public class DynamicPool : IDynamicPool
     {
-        private Stack<IPooledObject> m_objectPool = new Stack<IPooledObject>();
+        //private Stack<IPooledObject> m_objectPool = new Stack<IPooledObject>();
         private Dictionary<MinionType, Stack<IPooledObject>> m_allPools = new Dictionary<MinionType, Stack<IPooledObject>>();
 
         public IPooledObject GetFromPool(MinionType type, Func<IPooledObject> createMethod)

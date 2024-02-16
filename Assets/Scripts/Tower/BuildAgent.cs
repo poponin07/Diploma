@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TowerDefense
 {
     public class BuildAgent : MonoBehaviour
     { 
         private BuildComponent m_buildComponent;
-        
-
 
         public void Initialization(BuildComponent buildComponent)
         {
             m_buildComponent = buildComponent;
-        
         }
 
-        public void AfterBuildTodtr()
+        public void AfterBuild()
         {
             SphereCollider sphereCollider = GetComponentInChildren<SphereCollider>();
             sphereCollider.enabled = true;

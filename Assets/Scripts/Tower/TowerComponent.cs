@@ -13,6 +13,8 @@ public class TowerComponent : MonoBehaviour
    [SerializeField] private float m_range;
    [SerializeField] private ElementType m_type;
 
+   public bool isBuilt = false;
+
    private ShootComponent m_shootComponent;
    //[SerializeField] private SphereCollider m_sphereColliderRange;
 

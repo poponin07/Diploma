@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Score;
-using TowerDefense;
 using UnityEngine;
-using UnityEngine.UI;
 using Waves;
 
 public class UIManager : MonoBehaviour

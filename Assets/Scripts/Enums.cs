@@ -7,7 +7,6 @@ namespace TowerDefense
 
 public class Enums : MonoBehaviour
 {
-
 }
 
 public enum ElementType : byte
@@ -23,7 +22,7 @@ public enum MinionType : byte
     None = 0,
     Zomby = 1,
     Spider = 2,
-    Poison = 3,
+    Orc = 3,
 }
 
 }

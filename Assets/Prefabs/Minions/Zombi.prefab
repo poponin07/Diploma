@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7516c15b733371049a9e2e87348e8019, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1029,7 +1029,7 @@ MonoBehaviour:
   m_fireMaterial: {fileID: 2100000, guid: 7516c15b733371049a9e2e87348e8019, type: 2}
   m_iceMaterial: {fileID: 2100000, guid: b7e4401ba7b43cd48988f67bfe9eeba6, type: 2}
   m_poisonMaterial: {fileID: 2100000, guid: 8a3609ccb04039f4a8f7e5c79e7756af, type: 2}
-  m_isElemental: 0
+  m_isElemental: 1
   m_renderer: {fileID: 168025331}
 --- !u!1 &1788031517231208
 GameObject:

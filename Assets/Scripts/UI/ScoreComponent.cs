@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using TMPro.Examples;
 using UnityEngine;
 
 namespace Score
@@ -10,11 +6,11 @@ namespace Score
 
     public class ScoreComponent : MonoBehaviour
     {
-        private int m_score;
-        private int m_bestScore;
-
         [SerializeField] private TextMeshProUGUI m_scoreText;
         [SerializeField] private TextMeshProUGUI m_bestScoreText;
+        
+        private int m_score;
+        private int m_bestScore;
 
         private void Start()
         {

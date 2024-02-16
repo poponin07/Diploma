@@ -23,5 +23,12 @@ namespace TowerDefense
         public float moveSpider;
         public float damageSpider;
         public int ScoreSpider;
+        
+        [Header("Grade orc")] 
+        public bool isElementalOrc;
+        public float healthOrc;
+        public float moveOrc;
+        public float damageOrc;
+        public int ScoreOrc;
     }
 }

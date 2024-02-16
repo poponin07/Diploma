@@ -18,9 +18,14 @@ MonoBehaviour:
   healthZombie: 100
   moveZombie: 0
   damageZombie: 0
-  ScoreZombie: 10
+  ScoreZombie: 15
   isElementalSpider: 0
   healthSpider: 0
   moveSpider: 0
   damageSpider: 0
   ScoreSpider: 0
+  isElementalOrc: 0
+  healthOrc: 0
+  moveOrc: 0
+  damageOrc: 0
+  ScoreOrc: 0

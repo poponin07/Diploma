@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Security.Cryptography;
 using Minions;
 using TowerDefense.DynamicPool;
-using UnityEngine.Events;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,16 +15,15 @@ namespace TowerDefense
         [SerializeField] private int m_score;
         [SerializeField] private ElementType m_element;
         [SerializeField] private MinionType m_type;
+        
 
         [SerializeField] private Material m_commonMaterial;
         [SerializeField] private Material m_fireMaterial;
         [SerializeField] private Material m_iceMaterial;
         [SerializeField] private Material m_poisonMaterial;
         
-        //[SerializeField] private SpawnComponent _spawnComponent;
         public bool m_isElemental;
-        
-        
+
         public Action<BaseMinion> onDied;
         public Action<BaseMinion> onSpawn;
         public Action<int> onScore;
@@ -41,13 +38,13 @@ namespace TowerDefense
 
         [SerializeField] private MeshRenderer m_renderer;
 
-
-        //RANDOM
+        
         private void Awake()
         {
             SetRandomElement();
         }
 
+        //установка рандомной стихии
         private void SetRandomElement()
         {
             if (m_isElemental)
@@ -94,6 +91,7 @@ namespace TowerDefense
                 onDied?.Invoke(this);
                 onScore?.Invoke(Score); 
             }
+            
             onDied.Invoke(this);
             transform.position = new Vector3(50, 50, 50);
         }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -10,17 +7,17 @@ namespace TowerDefense
     public class CursorComponent : MonoBehaviour
     {
         [SerializeField] private UpgradeScript m_upgradeScript;
+        
+        private UpgradeTowerComponent m_upgradeTowerComponent;
+        private TowerComponent m_towerComponent;
+        
         private InputController _input;
         private Ray ray;
+        
         private const string Tower_Tag = "Tower";
-
-        private TowerComponent m_towerComponent = null;
-        private UpgradeTowerComponent m_upgradeTowerComponent;
-
         private int m_layerTowerNumber = 6;
         private int m_layerTowerMask;
-
-
+        
         private void Awake()
         {
             _input = new InputController();
@@ -45,7 +42,7 @@ namespace TowerDefense
                 {
                     TowerComponent component = hit.collider.gameObject.GetComponent<TowerComponent>();
 
-                    if (component != m_towerComponent)
+                    if (component != m_towerComponent && component.isBuilt)
                     {
                         m_towerComponent = component;
                         m_upgradeScript.m_selectedUpgrade = m_towerComponent.upgradeTowerComponent;

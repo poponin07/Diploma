@@ -19,6 +19,7 @@ namespace TowerDefense
         [Header("Prefabs")]
         [SerializeField] private GameObject m_ProjectilePrefab;
         
+        [Header("Minion parameters")] 
         [SerializeField] private float m_range;
         [SerializeField] private float m_damage;
         [SerializeField] private float m_attackSpeed;
@@ -91,7 +92,6 @@ namespace TowerDefense
                  m_Target = null;
                  return;
              }
-             
              
              var spawnTransform = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
              ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, spawnTransform, Quaternion.identity).GetComponent<ProjectileComponent>();

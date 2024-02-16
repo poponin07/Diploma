@@ -1,12 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace TowerDefense
 {
-
-public class ProjectileComponent : MonoBehaviour
+    public class ProjectileComponent : MonoBehaviour
 {
    [SerializeField] private float m_speed;
    [SerializeField] private ElementType m_type;

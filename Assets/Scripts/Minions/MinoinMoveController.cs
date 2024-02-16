@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TowerDefense;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,8 +19,7 @@ public class MinoinMoveController : MonoBehaviour
         target = m_points[indx];
         m_agent.SetDestination(target.position);
     }
-    
-    
+
 
     private void FixedUpdate()
     {

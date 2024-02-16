@@ -4,6 +4,5 @@ namespace Minions
 {
     public class ZombiComponent : BaseMinion
     {
-        
     }
 }

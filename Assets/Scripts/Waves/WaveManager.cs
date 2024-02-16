@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Minions;
 using TowerDefense;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 
 namespace Waves
 {
@@ -16,7 +15,6 @@ namespace Waves
         [SerializeField] private List<MinionType> m_minions;
         [SerializeField] private List<BaseMinion> m_AllMinions;
         [SerializeField] private UIManager m_UIManager;
-        [SerializeField] private PlayerData m_playerData;
 
 
         private void Start()
@@ -31,7 +29,6 @@ namespace Waves
             CheckWave();
             m_indexWave++;
             m_spawnComponent.StartSpawn(m_minions);
-          
         }
 
         private void CheckWave()
@@ -107,6 +104,16 @@ namespace Waves
                     baseMinion.Speed = m_CurWave.moveSpider;
                     baseMinion.Score = m_CurWave.ScoreSpider;
                     baseMinion.m_isElemental = m_CurWave.isElementalSpider;
+                    break;
+                }
+                
+                case OrcComponent:
+                {
+                    baseMinion.Damage = m_CurWave.damageOrc;
+                    baseMinion.Health = m_CurWave.healthOrc;
+                    baseMinion.Speed = m_CurWave.moveOrc;
+                    baseMinion.Score = m_CurWave.ScoreOrc;
+                    baseMinion.m_isElemental = m_CurWave.isElementalOrc;
                     break;
                 }
             }

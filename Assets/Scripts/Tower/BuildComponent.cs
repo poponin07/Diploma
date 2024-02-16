@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using UnityEditor.SceneManagement;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Debug = UnityEngine.Debug;
 
 namespace TowerDefense
 {
@@ -25,17 +20,13 @@ namespace TowerDefense
         private Plane plane = new Plane(Vector3.up, 0);
         public bool isBuild;
 
-private void Awake()
+        private void Awake()
         {
             _input = new InputController();
             _input.Enable();
             isBuild = true;
         }
 
-        private void Start()
-        {
-           // _input.Player.ClickForReycast.canceled += context =>  OnRayCastPlayer();
-        }
 
         public void SetMayBuild(bool result)
         {
@@ -62,14 +53,6 @@ private void Awake()
         {
             Camera _camera = Camera.main;
             ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
-
-            if (Physics.Raycast(ray, out var hit))
-            {
-               if (hit.collider.tag == "Minion")
-                {
-                    Debug.Log("Zomby");
-                }
-            }
         }
 
         IEnumerator TowerMagnetToCursor(GameObject tower)
@@ -90,17 +73,16 @@ private void Awake()
                     if (Input.GetKeyDown(KeyCode.Mouse0) && isBuild)
                     {
                         var towerObj = buildAgent.gameObject;
-                        //TowerComponent towerComponent = towerObj.GetComponent<TowerComponent>();
                         buildAgent.enabled = false;
-                        towerObj.GetComponent<BoxCollider>().isTrigger = true;
                         
-                        buildAgent.AfterBuildTodtr();
+                        towerObj.GetComponent<BoxCollider>().isTrigger = true;
+                        tower.GetComponent<TowerComponent>().isBuilt = true;
+                        buildAgent.AfterBuild();
                         shoot.enabled = true;
                         break;
                     }
                 }
-                
-            yield return null;
+                yield return null;
             }
             
         }
