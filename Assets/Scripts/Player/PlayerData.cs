@@ -5,7 +5,6 @@ namespace TowerDefense
 {
     public class PlayerData : MonoBehaviour
     {
-        //[SerializeField] private WaveManager m_wavemanager;
         [SerializeField] private ScoreComponent m_scoreComponent;
         [SerializeField] private UICoinComponent m_coinComponent;
         private int m_score;
@@ -14,7 +13,7 @@ namespace TowerDefense
 
         private void Start()
         {
-            m_coin = 20000;
+            m_coin = 350;
             m_coinComponent.UpdateUICoin(m_coin);
         }
 

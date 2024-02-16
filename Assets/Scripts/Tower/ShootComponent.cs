@@ -73,7 +73,7 @@ namespace TowerDefense
                  m_CanShoot = true;
              }
          }
-         
+         //понимаю,что нужен пул,  но не успел
          private void Shoot()
          {
              if (m_enemyTransforms.Count > 0)
@@ -81,7 +81,11 @@ namespace TowerDefense
                  m_Target = m_enemyTransforms.Last();
              }
 
-             if (m_Target == null || !m_Target.gameObject.activeSelf)
+             /*if ( !m_Target.gameObject.activeSelf)
+             {
+                 return;
+             }*/
+             if (m_Target == null)
              {
                  return;
              }

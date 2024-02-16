@@ -139,10 +139,6 @@ namespace TowerDefense
             return result;
         } 
 
-        private void OnSpawn(BaseMinion minion)
-        {
-            
-        }
         private void OnDied(BaseMinion minion)
         {
             m_dynamicPool.Release(minion.Type, minion);

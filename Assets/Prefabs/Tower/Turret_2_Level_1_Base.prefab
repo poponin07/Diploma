@@ -141,7 +141,7 @@ MonoBehaviour:
   m_range: 7
   m_damage: 0
   m_attackSpeed: 0
-  m_elementType: 0
+  m_elementType: 1
   m_enemyTransforms: []
 --- !u!65 &-5891982638343604060
 BoxCollider:
@@ -173,6 +173,7 @@ MonoBehaviour:
   m_attackSpeed: 1.5
   m_range: 7
   m_type: 1
+  isBuilt: 0
   uiUpgradeWindow: {fileID: 0}
   upgradeTowerComponent: {fileID: -1514353739514329988}
 --- !u!114 &-1514353739514329988
