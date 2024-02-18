@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Minions;
+using Unity.VisualScripting;
 using UnityEngine;
 using Waves;
 
@@ -18,6 +19,7 @@ namespace TowerDefense
         [SerializeField] private SpiderComponent m_spiderTemplate;
         [SerializeField] private OrcComponent m_orcTemplate;
         [SerializeField] private PlayerData m_playerData;
+        [SerializeField] private Camera m_camera;
 
         private float m_spawnOffset;
         private int m_currentWave;
@@ -66,6 +68,7 @@ namespace TowerDefense
             moveComponent.SetRunIndex(-1);
             minion.transform.position = m_spawnPointTransform.position;
             moveComponent.m_points = m_path;
+            minion.m_minionUI.SetHealth(minion.Health, minion.Element);
             minion.gameObject.SetActive(true);
             minion.Spawn();
         }
@@ -108,6 +111,7 @@ namespace TowerDefense
             var result = Instantiate(m_zombieTemplate, m_spawnPointTransform.position, Quaternion.identity);
             BaseMinion baseMinion = result.GetComponent<BaseMinion>();
             result.gameObject.SetActive(false);
+            result.GetComponent<MinionUI>().camera = m_camera;
             result.onDied += OnDied;
             baseMinion.onSpawn += m_waveManager.MinionSpawn;
             baseMinion.onDied += m_waveManager.MinionDespawn;
@@ -120,6 +124,7 @@ namespace TowerDefense
             var result = Instantiate(m_spiderTemplate, m_spawnPointTransform.position, Quaternion.identity);
             BaseMinion baseMinion = result.GetComponent<BaseMinion>();
             result.gameObject.SetActive(false);
+            result.GetComponent<MinionUI>().camera = m_camera;
             result.onDied += OnDied;
             baseMinion.onSpawn += m_waveManager.MinionSpawn;
             baseMinion.onDied += m_waveManager.MinionDespawn;
@@ -132,6 +137,7 @@ namespace TowerDefense
             var result = Instantiate(m_orcTemplate, m_spawnPointTransform.position, Quaternion.identity);
             BaseMinion baseMinion = result.GetComponent<BaseMinion>();
             result.gameObject.SetActive(false);
+            result.GetComponent<MinionUI>().camera = m_camera;
             result.onDied += OnDied;
             baseMinion.onSpawn += m_waveManager.MinionSpawn;
             baseMinion.onDied += m_waveManager.MinionDespawn;

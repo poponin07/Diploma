@@ -26,8 +26,7 @@ namespace TowerDefense
             _input.Enable();
             isBuild = true;
         }
-
-
+        
         public void SetMayBuild(bool result)
         {
             isBuild = result;

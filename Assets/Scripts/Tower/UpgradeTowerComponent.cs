@@ -26,6 +26,7 @@ public class UpgradeTowerComponent : MonoBehaviour
     {
         m_TowerComponent = gameObject.GetComponent<TowerComponent>();
         uiUpgradeTowerComponent = m_TowerComponent.uiUpgradeWindow;
+        uiUpgradeTowerComponent.SetParams(m_TowerComponent.Damage, m_TowerComponent.AttackSpead, m_TowerComponent.Range);
     }
 
     public void UpgradeDamage()
@@ -39,6 +40,7 @@ public class UpgradeTowerComponent : MonoBehaviour
         m_priceGradeValue = m_startPrice + (m_startPrice * m_priceIndex);
         uiUpgradeTowerComponent = m_TowerComponent.uiUpgradeWindow;
         uiUpgradeTowerComponent.SetNewPrice(m_priceGradeValue);
+        uiUpgradeTowerComponent.SetParams(m_TowerComponent.Damage, m_TowerComponent.AttackSpead, m_TowerComponent.Range);
         m_TowerComponent.SetTowerParams();
         m_damageGradeIndex++;
         m_priceIndex++;
@@ -55,6 +57,7 @@ public class UpgradeTowerComponent : MonoBehaviour
         m_priceGradeValue = m_startPrice + (m_startPrice * m_priceIndex);
         uiUpgradeTowerComponent = m_TowerComponent.uiUpgradeWindow;
         uiUpgradeTowerComponent.SetNewPrice(m_priceGradeValue);
+        uiUpgradeTowerComponent.SetParams(m_TowerComponent.Damage, m_TowerComponent.AttackSpead, m_TowerComponent.Range);
         m_TowerComponent.SetTowerParams();
         m_attackSpeedGradIndex++;
         m_priceIndex++;
@@ -70,6 +73,7 @@ public class UpgradeTowerComponent : MonoBehaviour
         m_TowerComponent.Range += m_rangeGradeValue;
         m_priceGradeValue = m_startPrice + (m_startPrice * m_priceIndex);
         uiUpgradeTowerComponent = m_TowerComponent.uiUpgradeWindow;
+        uiUpgradeTowerComponent.SetParams(m_TowerComponent.Damage, m_TowerComponent.AttackSpead, m_TowerComponent.Range);
         uiUpgradeTowerComponent.SetNewPrice(m_priceGradeValue);
         m_TowerComponent.SetTowerParams();
         m_rangeGradeIndex++;

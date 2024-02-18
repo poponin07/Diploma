@@ -118,6 +118,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a355a40218dff24d8606c2e6ebfbb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_renderer: {fileID: 922860489854927701}
+  m_green: {fileID: 2100000, guid: 2fe7f61ae600e55499634ca4371f80e8, type: 2}
+  m_red: {fileID: 2100000, guid: 5f0fd3898a706914bb3b5b82bf17d7b2, type: 2}
+  m_default: {fileID: 5320507565814304501, guid: 6a2804b640b654648b47afca42dc2866,
+    type: 3}
 --- !u!114 &-5739233066533439101
 MonoBehaviour:
   m_ObjectHideFlags: 0

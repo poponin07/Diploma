@@ -44,7 +44,7 @@ namespace TowerDefense
 
                case ElementType.Fire:
                {
-                  return .5f;
+                  return 0f;
                }
 
                case ElementType.Ice:
@@ -76,7 +76,7 @@ namespace TowerDefense
 
                case ElementType.Ice:
                {
-                  return .5f;
+                  return 0f;
                }
 
                case ElementType.Poison:
@@ -107,7 +107,7 @@ namespace TowerDefense
 
                case ElementType.Poison:
                {
-                  return .5f;
+                  return 0f;
                }
             }
          }

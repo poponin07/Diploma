@@ -15,7 +15,6 @@ namespace TowerDefense
         [SerializeField] private int m_score;
         [SerializeField] private ElementType m_element;
         [SerializeField] private MinionType m_type;
-        
 
         [SerializeField] private Material m_commonMaterial;
         [SerializeField] private Material m_fireMaterial;
@@ -23,6 +22,8 @@ namespace TowerDefense
         [SerializeField] private Material m_poisonMaterial;
         
         public bool m_isElemental;
+        
+        public MinionUI m_minionUI;
 
         public Action<BaseMinion> onDied;
         public Action<BaseMinion> onSpawn;
@@ -39,9 +40,10 @@ namespace TowerDefense
         [SerializeField] private MeshRenderer m_renderer;
 
         
-        private void Awake()
+        private void Start()
         {
             SetRandomElement();
+            m_minionUI.SetHealth(m_health, Element);
         }
 
         //установка рандомной стихии
@@ -49,8 +51,8 @@ namespace TowerDefense
         {
             if (m_isElemental)
             {
-                int randomIndex = Random.Range(0, 5);
-                m_element = (ElementType)randomIndex;
+                int randomIndex = Random.Range(0, 4);
+                Element = (ElementType)randomIndex;
 
                 switch (m_element)
                 {
@@ -77,6 +79,7 @@ namespace TowerDefense
         {
             float multiplierDamage = CalculationElementalDamage.CalculationDamage(Element, projectileType);
             Health -= damage * multiplierDamage;
+            m_minionUI.RefreshHealth(Health);
             
             if (Health <= 0)
             {

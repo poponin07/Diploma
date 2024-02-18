@@ -16,12 +16,12 @@ MonoBehaviour:
   - {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e, type: 3}
   - {fileID: 5128811620208064792, guid: e42dce10de392fb46b7cf553d7658cf4, type: 3}
   - {fileID: 7674759261756376287, guid: 5afd1af3d47333f459a9daf744e7ddf4, type: 3}
-  isElementalZombie: 0
+  isElementalZombie: 1
   healthZombie: 300
   moveZombie: 0
   damageZombie: 0
   ScoreZombie: 60
-  isElementalSpider: 0
+  isElementalSpider: 1
   healthSpider: 650
   moveSpider: 0
   damageSpider: 0
