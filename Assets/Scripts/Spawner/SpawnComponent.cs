@@ -39,7 +39,7 @@ namespace TowerDefense
             var myArray = path.GetComponentsInChildren<Transform>();
             m_path = myArray.ToList();
             m_path.Remove(m_path[0]);
-            m_spawnOffset = 0.2f;
+            m_spawnOffset = 0.5f;
         }
         
         public void StartSpawn(List<MinionType> minions)

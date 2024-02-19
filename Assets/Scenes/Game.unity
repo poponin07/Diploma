@@ -2134,7 +2134,6 @@ GameObject:
   - component: {fileID: 253398130}
   - component: {fileID: 253398134}
   - component: {fileID: 253398135}
-  - component: {fileID: 253398136}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Path
@@ -2254,22 +2253,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_scoreText: {fileID: 1885801784}
   m_bestScoreText: {fileID: 842749898}
---- !u!114 &253398136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 253398129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c05561b0eecc624f8166f7a072d01e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_baseComponent: {fileID: 981892354}
-  m_playerData: {fileID: 963194232}
-  m_scoreComponent: {fileID: 253398135}
-  m_ability: {fileID: 0}
 --- !u!4 &254201474 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2116602288977711756, guid: 4abbdb50213dde041994e2d4dcf791e9,
@@ -9526,7 +9509,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 253398136}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AbilityComponent, Assembly-CSharp
         m_MethodName: Heal
         m_Mode: 1
@@ -9696,6 +9679,7 @@ GameObject:
   - component: {fileID: 963194232}
   - component: {fileID: 963194233}
   - component: {fileID: 963194234}
+  - component: {fileID: 963194235}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9880,6 +9864,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_selectedUpgrade: {fileID: 0}
+--- !u!114 &963194235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c05561b0eecc624f8166f7a072d01e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baseComponent: {fileID: 981892354}
+  m_playerData: {fileID: 963194232}
+  m_abilitySnow: {fileID: 3084413401902626624, guid: 2c9a6dcc4c4439742b7c438011202be4,
+    type: 3}
 --- !u!1 &966293580 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6248438522094404593, guid: 8f75d7d8649593341822be19369f95fb,
@@ -13039,9 +13039,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 253398136}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AbilityComponent, Assembly-CSharp
-        m_MethodName: AddScore
+        m_MethodName: SetSlow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

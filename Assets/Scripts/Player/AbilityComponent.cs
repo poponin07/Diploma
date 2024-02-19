@@ -8,8 +8,7 @@ public class AbilityComponent : MonoBehaviour
 {
     [SerializeField] private BaseComponent m_baseComponent;
     [SerializeField] private PlayerData m_playerData;
-    [SerializeField] private ScoreComponent m_scoreComponent;
-    [SerializeField] private GameObject m_ability;
+    [SerializeField] private GameObject m_abilitySnow;
     private int m_ability1Price;
 
     private Plane plane = new Plane(Vector3.up, 0);
@@ -21,23 +20,31 @@ public class AbilityComponent : MonoBehaviour
         _input.Enable();
     }
 
+    public void SetSlow()
+    {
+        GameObject newAbility = Instantiate(m_abilitySnow, new Vector3(55, 5, 5), Quaternion.identity);
+        StartCoroutine(UseAbility(newAbility));
+    }
+    
     IEnumerator UseAbility(GameObject ability)
     {
-        GameObject newAbility = Instantiate(m_ability, new Vector3(55, 5, 5), Quaternion.identity);
+
         Camera _camera = Camera.main;
 
         while (true)
         {
-            plane.Raycast(ray, out float distance);
-            newAbility.transform.position = ray.GetPoint(distance);
-        
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+            
+            if (plane.Raycast(ray, out float distance))
             {
-                StartCoroutine(StartAbility());
-                break;
-            }   
-        }
+                ability.transform.position = ray.GetPoint(distance);
 
+                if (Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    break;
+                }
+            }
+        }
         yield return null;
     }
 
@@ -53,15 +60,7 @@ public class AbilityComponent : MonoBehaviour
             m_baseComponent.AddHeath(5);
         }
     }
-    
-    public void AddScore()
-    {
-        if (m_playerData.CheckCoins(200))
-        {
-            m_scoreComponent.UpdateScore(100);
-            
-        }
-    }
+   
     
     private void OnRayCastPlayer()
     {
