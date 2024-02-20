@@ -17,6 +17,7 @@ namespace TowerDefense
         [SerializeField] private GameObject m_iceTower;
         [SerializeField] private GameObject m_posionTower;
         [SerializeField] private PlayerData m_playerData;
+        private bool m_isBuilding;
         private Plane plane = new Plane(Vector3.up, 0);
         public bool isBuild;
 
@@ -25,6 +26,7 @@ namespace TowerDefense
             _input = new InputController();
             _input.Enable();
             isBuild = true;
+            m_isBuilding = false;
         }
         
         public void SetMayBuild(bool result)
@@ -34,6 +36,11 @@ namespace TowerDefense
         
         public void CheckCanBuildTower(GameObject tower)
         {
+            if (m_isBuilding)
+            {
+                return;
+            }
+            m_isBuilding = true;
             GameObject newTower = Instantiate(tower, new Vector3(55, 5, 5), Quaternion.identity);
             TowerComponent towerComponent = newTower.GetComponent<TowerComponent>();
             towerComponent.uiUpgradeWindow = uiUpgradeTowerComponent;
@@ -78,6 +85,7 @@ namespace TowerDefense
                         tower.GetComponent<TowerComponent>().isBuilt = true;
                         buildAgent.AfterBuild();
                         shoot.enabled = true;
+                        m_isBuilding = false;
                         break;
                     }
                 }

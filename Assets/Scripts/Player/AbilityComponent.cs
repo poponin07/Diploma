@@ -8,27 +8,35 @@ public class AbilityComponent : MonoBehaviour
 {
     [SerializeField] private BaseComponent m_baseComponent;
     [SerializeField] private PlayerData m_playerData;
-    [SerializeField] private GameObject m_abilitySnow;
+    [SerializeField] private GameObject m_abilitySnowPrefab;
     private int m_ability1Price;
+    private bool m_isBuilding;
 
     private Plane plane = new Plane(Vector3.up, 0);
     private InputController _input;
     private Ray ray;
+    
     private void Awake()
     {
         _input = new InputController();
         _input.Enable();
-    }
-
-    public void SetSlow()
-    {
-        GameObject newAbility = Instantiate(m_abilitySnow, new Vector3(55, 5, 5), Quaternion.identity);
-        StartCoroutine(UseAbility(newAbility));
+        m_isBuilding = false;
     }
     
-    IEnumerator UseAbility(GameObject ability)
+    public void SetSlow(GameObject ability)
     {
-
+        if (m_isBuilding)
+        {
+            return;
+        }
+        m_isBuilding = true;
+        
+        GameObject newAbility = Instantiate(m_abilitySnowPrefab, new Vector3(55, 5, 5), Quaternion.identity);
+        StartCoroutine(AbilityBuilding(newAbility));
+    }
+    
+    IEnumerator AbilityBuilding(GameObject ability)
+    {
         Camera _camera = Camera.main;
 
         while (true)
@@ -39,11 +47,14 @@ public class AbilityComponent : MonoBehaviour
             {
                 ability.transform.position = ray.GetPoint(distance);
 
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKey(KeyCode.Mouse0))
                 {
+                    m_isBuilding = false;
+                    //Debug.Log("123");
                     break;
                 }
             }
+            yield return new WaitForEndOfFrame();
         }
         yield return null;
     }
