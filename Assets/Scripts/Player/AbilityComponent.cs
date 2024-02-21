@@ -31,7 +31,7 @@ public class AbilityComponent : MonoBehaviour
         }
         m_isBuilding = true;
         
-        GameObject newAbility = Instantiate(m_abilitySnowPrefab, new Vector3(55, 5, 5), Quaternion.identity);
+        GameObject newAbility = Instantiate(ability, new Vector3(55, 5, 5), Quaternion.identity);
         StartCoroutine(AbilityBuilding(newAbility));
     }
     

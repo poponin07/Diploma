@@ -6,13 +6,12 @@ using UnityEngine.AI;
 
 public class SlowDownAbility : BaseAbility
 {
+    [SerializeField] private float m_slowAmount;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Minion"))
         {
-           var miniomspeed =  other.gameObject.GetComponent<NavMeshAgent>().speed;
-           miniomspeed -= 2;
-           Debug.Log("slow");
+           var miniomspeed =  other.gameObject.GetComponent<NavMeshAgent>().speed -= m_slowAmount;
         }
     }
 
@@ -20,9 +19,7 @@ public class SlowDownAbility : BaseAbility
     {
         if (other.tag.Equals("Minion"))
         {
-            var miniomspeed =  other.gameObject.GetComponent<NavMeshAgent>().speed;
-            miniomspeed += 2;
-            Debug.Log("slow---");
+            var miniomspeed =  other.gameObject.GetComponent<NavMeshAgent>().speed += m_slowAmount;
         }
     }
 }

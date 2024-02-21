@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1885358749097285232}
   - component: {fileID: -4986446105847351412}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: SlowDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,8 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa8b71821cfc4ee4993c9bafca74486e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_coolDown: 0
-  m_unlockPrice: 0
+  m_coolDown: 60
+  m_unlockPrice: 300
+  m_slowAmount: 1.5
 --- !u!54 &-4986446105847351412
 Rigidbody:
   m_ObjectHideFlags: 0
