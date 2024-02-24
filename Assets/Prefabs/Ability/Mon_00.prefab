@@ -30436,6 +30436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cc34fe02c357946a08de492bec01b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_coolDown: 120
   m_explosionZone: {fileID: 2768609714658119693}
   m_damage: 500
   m_renderer: {fileID: 137188083824238930}
@@ -35551,3 +35552,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bombAbility: {fileID: -2972046043628035767}
+  m_coolDownText: {fileID: 0}
+  m_root: {fileID: 0}

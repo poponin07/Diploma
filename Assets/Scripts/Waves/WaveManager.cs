@@ -7,9 +7,9 @@ namespace Waves
 {
     public class WaveManager : MonoBehaviour
     {
-        [SerializeField] private WaveGr m_CurWave;
-        [SerializeField] private int m_CurWaveIndex = 0;
-        [SerializeField] private int m_indexWave;
+        private WaveGr m_CurWave;
+        private int m_CurWaveIndex = 0;
+        private int m_indexWave;
         [SerializeField] private SpawnComponent m_spawnComponent;
         [SerializeField] private List<WaveGr> m_waveGrs;
         [SerializeField] private List<MinionType> m_minions;
@@ -33,7 +33,7 @@ namespace Waves
 
         private void CheckWave()
         {
-            if (m_indexWave == 10)
+            if (m_indexWave == 2)
             {
                 ChangeWaveParams();
             }
@@ -72,14 +72,14 @@ namespace Waves
         private void ConfigurationMinions()
         {
             m_minions.Clear();
-            
+
             foreach (var obj  in m_CurWave.minioms)
             {
                 BaseMinion minion = obj.GetComponent<BaseMinion>();
 
                 minion = SetMinionParametersByWave(minion);
                 m_minions.Add(minion.Type);
-            }
+            } 
         }
 
         public BaseMinion SetMinionParametersByWave(BaseMinion baseMinion)

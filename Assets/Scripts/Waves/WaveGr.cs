@@ -10,6 +10,8 @@ namespace TowerDefense
         [Header("Minions")] 
         public List<GameObject> minioms = new List<GameObject>();
 
+        public bool infinityWave;
+
         [Header("Grade zomby")] 
         public bool isElementalZombie;
         public float healthZombie;

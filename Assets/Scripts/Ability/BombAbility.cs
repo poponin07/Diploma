@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using TowerDefense;
 using UnityEngine;
 
-public class BombAbility : MonoBehaviour
+public class BombAbility : BaseAbility
 {
     [SerializeField] private GameObject m_explosionZone;
     [SerializeField] private float m_damage;
     [SerializeField] private SkinnedMeshRenderer m_renderer;
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Minion"))

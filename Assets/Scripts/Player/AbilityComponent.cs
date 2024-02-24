@@ -1,20 +1,26 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Score;
+using TMPro;
 using TowerDefense;
+using UnityEngine.UI;
 
 public class AbilityComponent : MonoBehaviour
 {
     [SerializeField] private BaseComponent m_baseComponent;
     [SerializeField] private PlayerData m_playerData;
-    [SerializeField] private GameObject m_abilitySnowPrefab;
     private int m_ability1Price;
     private bool m_isBuilding;
 
     private Plane plane = new Plane(Vector3.up, 0);
     private InputController _input;
     private Ray ray;
+    
+    private bool m_inCooldown;
+    [SerializeField] private TextMeshProUGUI m_TimeBombText;
+    [SerializeField] private Button BombButton;
+    [SerializeField] private TextMeshProUGUI m_TimeSlowText;
+    [SerializeField] private Button SlowButton;
     
     private void Awake()
     {
@@ -50,7 +56,18 @@ public class AbilityComponent : MonoBehaviour
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
                     m_isBuilding = false;
-                    //Debug.Log("123");
+                    var bombAbility = ability.GetComponent<BaseAbility>();
+
+                    switch (bombAbility)
+                    {
+                        case BombAbility:
+                            bombAbility.StartTimer(m_TimeBombText, BombButton);
+                            break;
+                        
+                        case SlowDownAbility:
+                            bombAbility.StartTimer(m_TimeSlowText, SlowButton);
+                            break;
+                    }
                     break;
                 }
             }
@@ -58,6 +75,7 @@ public class AbilityComponent : MonoBehaviour
         }
         yield return null;
     }
+    
 
     IEnumerator StartAbility()
     {
@@ -73,10 +91,19 @@ public class AbilityComponent : MonoBehaviour
     }
    
     
-    private void OnRayCastPlayer()
+    private void OnRayCast()
     {
         Camera _camera = Camera.main;
         ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+    }
+
+
+    public void Update()
+    {
+        if (m_inCooldown)
+        {
+            
+        }
     }
 
     

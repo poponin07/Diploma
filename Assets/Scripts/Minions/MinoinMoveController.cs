@@ -32,7 +32,7 @@ public class MinoinMoveController : MonoBehaviour
 
     public void SetRunIndex(int inx)
     {
-        indx = -1;
+        indx = 0;
     }
 
     //выбор новой точки для следования

@@ -26,6 +26,7 @@ namespace TowerDefense
         [SerializeField] private ElementType m_elementType;
 
         [SerializeField]private List<Transform> m_enemyTransforms = new List<Transform>();
+        public ProjectilePool1 m_poolProjectile;
         
         public float Damage { get => m_damage; set => m_damage = value; }
         public float AttackSpeed { get => m_attackSpeed; set => m_attackSpeed = value; }
@@ -63,7 +64,6 @@ namespace TowerDefense
              m_sphereCollider.radius = m_range;
 
              m_elementType = elementType;
-
          }
          
          private void isCanShoot()
@@ -80,11 +80,7 @@ namespace TowerDefense
              {
                  m_Target = m_enemyTransforms.Last();
              }
-
-             /*if ( !m_Target.gameObject.activeSelf)
-             {
-                 return;
-             }*/
+             
              if (m_Target == null)
              {
                  return;
@@ -97,8 +93,9 @@ namespace TowerDefense
                  return;
              }
              
-             var spawnTransform = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
-             ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, spawnTransform, Quaternion.identity).GetComponent<ProjectileComponent>();
+             var bullet = m_poolProjectile.GetBullet();
+             bullet.transform.position = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z);
+             ProjectileComponent projectile = Instantiate(m_ProjectilePrefab, bullet.transform.position, Quaternion.identity).GetComponent<ProjectileComponent>();
              projectile.SetDamage(m_damage, m_elementType);
              m_CurCooldown = m_Cooldown;
              projectile.m_target = m_Target.transform;

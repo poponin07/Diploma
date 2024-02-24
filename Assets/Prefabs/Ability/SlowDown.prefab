@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_coolDown: 60
-  m_unlockPrice: 300
   m_slowAmount: 1.5
+  m_lifeTime: 10
 --- !u!54 &-4986446105847351412
 Rigidbody:
   m_ObjectHideFlags: 0

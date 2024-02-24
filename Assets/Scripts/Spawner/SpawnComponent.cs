@@ -36,8 +36,8 @@ namespace TowerDefense
 
         private void Start()
         {
-            var myArray = path.GetComponentsInChildren<Transform>();
-            m_path = myArray.ToList();
+            var array = path.GetComponentsInChildren<Transform>();
+            m_path = array.ToList();
             m_path.Remove(m_path[0]);
             m_spawnOffset = 0.5f;
         }
@@ -49,7 +49,6 @@ namespace TowerDefense
             var waveEnemies = GetWaveEnemies(waveDesc);
             StartCoroutine(SpawnOffset(waveEnemies));
         }
-
 
         IEnumerator SpawnOffset(List<BaseMinion> spawnList)
         {
@@ -64,8 +63,9 @@ namespace TowerDefense
         {
             m_waveManager.SetMinionParametersByWave(minion);
             MinoinMoveController moveComponent = minion.gameObject.GetComponent<MinoinMoveController>();
-            moveComponent.SetTarget();
             moveComponent.SetRunIndex(-1);
+            moveComponent.SetTarget();
+            
             minion.transform.position = m_spawnPointTransform.position;
             moveComponent.m_points = m_path;
             minion.m_minionUI.SetHealth(minion.Health, minion.Element);
@@ -165,6 +165,10 @@ namespace TowerDefense
         private Dictionary<MinionType, int> CreateWaveDesc(List<MinionType> minionTypes)
         {
             var resultDesc = new Dictionary<MinionType, int>();
+            foreach (var min in minionTypes)
+            {
+                Debug.Log(min);
+            }
             
             foreach (var type in minionTypes)
             {
@@ -173,7 +177,6 @@ namespace TowerDefense
                     resultDesc.Add(type, m_currentWave * multiplier);
                 }
             }
-
             return resultDesc;
         }
     }

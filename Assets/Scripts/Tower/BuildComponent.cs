@@ -10,13 +10,9 @@ namespace TowerDefense
         private Ray ray;
 
         [SerializeField] private UIUpgradeWindow uiUpgradeTowerComponent;
-        [SerializeField] UpgradeTowerComponent m_upgradeTowerComponent;
-        
-        [SerializeField] private GameObject m_commonTower;
-        [SerializeField] private GameObject m_fireTower;
-        [SerializeField] private GameObject m_iceTower;
-        [SerializeField] private GameObject m_posionTower;
+
         [SerializeField] private PlayerData m_playerData;
+        [SerializeField] private ProjectilePool1 m_pool;
         private bool m_isBuilding;
         private Plane plane = new Plane(Vector3.up, 0);
         public bool isBuild;
@@ -43,6 +39,7 @@ namespace TowerDefense
             m_isBuilding = true;
             GameObject newTower = Instantiate(tower, new Vector3(55, 5, 5), Quaternion.identity);
             TowerComponent towerComponent = newTower.GetComponent<TowerComponent>();
+            newTower.GetComponent<ShootComponent>().m_poolProjectile = m_pool;
             towerComponent.uiUpgradeWindow = uiUpgradeTowerComponent;
             towerComponent.upgradeTowerComponent.m_playerData = m_playerData;
 

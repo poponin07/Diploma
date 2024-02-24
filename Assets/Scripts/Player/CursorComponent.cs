@@ -42,13 +42,17 @@ namespace TowerDefense
                 {
                     TowerComponent component = hit.collider.gameObject.GetComponent<TowerComponent>();
 
-                    if (component != m_towerComponent && component.isBuilt)
+                   
+
+                    if (component.isBuilt)
                     {
                         m_towerComponent = component;
                         m_upgradeScript.m_selectedUpgrade = m_towerComponent.upgradeTowerComponent;
                         m_towerComponent.upgradeTowerComponent.RefreshUI();
+                        m_towerComponent.uiUpgradeWindow.SetParams(m_towerComponent.Damage, m_towerComponent.AttackSpead, m_towerComponent.Range);
                         hit.collider.gameObject.GetComponent<TowerComponent>().uiUpgradeWindow.Show();
                     }
+                   
                 }
             }
             else if(m_towerComponent != null)
