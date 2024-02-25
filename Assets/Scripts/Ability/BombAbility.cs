@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TowerDefense;
 using UnityEngine;
 
 public class BombAbility : BaseAbility
@@ -8,12 +6,15 @@ public class BombAbility : BaseAbility
     [SerializeField] private GameObject m_explosionZone;
     [SerializeField] private float m_damage;
     [SerializeField] private SkinnedMeshRenderer m_renderer;
-    
+    [SerializeField] private GameObject m_zone;
+    private BoxCollider m_collider;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Minion"))
         {
-            m_renderer.enabled = false;
+            m_renderer.enabled = false; 
+            gameObject.GetComponent<BoxCollider>().enabled =  false;
             StartCoroutine(ExplosionCor());
         }
     }
@@ -22,7 +23,7 @@ public class BombAbility : BaseAbility
     {
         m_explosionZone.SetActive(true);
         yield return new WaitForSeconds(0.2f);
-        Destroy(gameObject);
+        m_zone.SetActive(false);
     }
 
     public float GetDamage()

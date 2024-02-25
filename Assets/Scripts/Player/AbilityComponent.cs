@@ -61,6 +61,7 @@ public class AbilityComponent : MonoBehaviour
                     switch (bombAbility)
                     {
                         case BombAbility:
+                            
                             bombAbility.StartTimer(m_TimeBombText, BombButton);
                             break;
                         
@@ -76,12 +77,6 @@ public class AbilityComponent : MonoBehaviour
         yield return null;
     }
     
-
-    IEnumerator StartAbility()
-    {
-        yield return null;
-    }
-
     public void Heal()
     {
         if (m_playerData.CheckCoins(500))
@@ -89,22 +84,10 @@ public class AbilityComponent : MonoBehaviour
             m_baseComponent.AddHeath(5);
         }
     }
-   
     
     private void OnRayCast()
     {
         Camera _camera = Camera.main;
         ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
     }
-
-
-    public void Update()
-    {
-        if (m_inCooldown)
-        {
-            
-        }
-    }
-
-    
 }

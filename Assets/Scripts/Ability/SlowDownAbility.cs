@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,7 +14,8 @@ public class SlowDownAbility : BaseAbility
             m_lifeTime -= Time.deltaTime;
             if (m_lifeTime <= 0)
             {
-                Destroy(gameObject);
+                gameObject.GetComponent<MeshRenderer>().enabled = false;
+                gameObject.GetComponent<BoxCollider>().enabled = false;
             }
         }
     }

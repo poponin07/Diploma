@@ -33,7 +33,7 @@ namespace Waves
 
         private void CheckWave()
         {
-            if (m_indexWave == 2)
+            if (m_indexWave == 10)
             {
                 ChangeWaveParams();
             }
