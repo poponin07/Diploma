@@ -19,16 +19,16 @@ MonoBehaviour:
   infinityWave: 1
   isElementalZombie: 1
   healthZombie: 450
-  moveZombie: 0
+  moveZombie: 4
   damageZombie: 0
   ScoreZombie: 100
   isElementalSpider: 1
   healthSpider: 800
-  moveSpider: 0
+  moveSpider: 3.1
   damageSpider: 0
   ScoreSpider: 150
   isElementalOrc: 1
   healthOrc: 2000
-  moveOrc: 0
+  moveOrc: 3.1
   damageOrc: 0
   ScoreOrc: 300

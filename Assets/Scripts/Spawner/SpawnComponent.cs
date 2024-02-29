@@ -5,6 +5,7 @@ using System.Linq;
 using Minions;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Waves;
 
 namespace TowerDefense
@@ -63,6 +64,7 @@ namespace TowerDefense
         {
             m_waveManager.SetMinionParametersByWave(minion);
             MinoinMoveController moveComponent = minion.gameObject.GetComponent<MinoinMoveController>();
+
             moveComponent.SetRunIndex(-1);
             moveComponent.SetTarget();
             
@@ -112,6 +114,7 @@ namespace TowerDefense
             BaseMinion baseMinion = result.GetComponent<BaseMinion>();
             result.gameObject.SetActive(false);
             result.GetComponent<MinionUI>().camera = m_camera;
+            baseMinion.SetSpeed(baseMinion.Speed);
             result.onDied += OnDied;
             baseMinion.onSpawn += m_waveManager.MinionSpawn;
             baseMinion.onDied += m_waveManager.MinionDespawn;
@@ -123,6 +126,7 @@ namespace TowerDefense
         {
             var result = Instantiate(m_spiderTemplate, m_spawnPointTransform.position, Quaternion.identity);
             BaseMinion baseMinion = result.GetComponent<BaseMinion>();
+            baseMinion.SetSpeed(baseMinion.Speed);
             result.gameObject.SetActive(false);
             result.GetComponent<MinionUI>().camera = m_camera;
             result.onDied += OnDied;
@@ -136,6 +140,7 @@ namespace TowerDefense
         {
             var result = Instantiate(m_orcTemplate, m_spawnPointTransform.position, Quaternion.identity);
             BaseMinion baseMinion = result.GetComponent<BaseMinion>();
+            baseMinion.SetSpeed(baseMinion.Speed);
             result.gameObject.SetActive(false);
             result.GetComponent<MinionUI>().camera = m_camera;
             result.onDied += OnDied;
@@ -165,11 +170,7 @@ namespace TowerDefense
         private Dictionary<MinionType, int> CreateWaveDesc(List<MinionType> minionTypes)
         {
             var resultDesc = new Dictionary<MinionType, int>();
-            foreach (var min in minionTypes)
-            {
-                Debug.Log(min);
-            }
-            
+
             foreach (var type in minionTypes)
             {
                 if (m_typeMultipliers.TryGetValue(type, out int multiplier))

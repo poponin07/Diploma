@@ -16,18 +16,19 @@ MonoBehaviour:
   - {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e, type: 3}
   - {fileID: 5128811620208064792, guid: e42dce10de392fb46b7cf553d7658cf4, type: 3}
   - {fileID: 7674759261756376287, guid: 5afd1af3d47333f459a9daf744e7ddf4, type: 3}
+  infinityWave: 0
   isElementalZombie: 1
   healthZombie: 300
-  moveZombie: 0
+  moveZombie: 4
   damageZombie: 0
   ScoreZombie: 60
   isElementalSpider: 1
   healthSpider: 650
-  moveSpider: 0
+  moveSpider: 3.1
   damageSpider: 0
   ScoreSpider: 100
   isElementalOrc: 0
   healthOrc: 1000
-  moveOrc: 0
+  moveOrc: 3.1
   damageOrc: 0
   ScoreOrc: 200

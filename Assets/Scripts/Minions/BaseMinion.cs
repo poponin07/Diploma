@@ -2,6 +2,7 @@
 using Minions;
 using TowerDefense.DynamicPool;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 
@@ -15,12 +16,15 @@ namespace TowerDefense
         [SerializeField] private int m_score;
         [SerializeField] private ElementType m_element;
         [SerializeField] private MinionType m_type;
-
+        
+        [SerializeField] private MeshRenderer m_renderer;
         [SerializeField] private Material m_commonMaterial;
         [SerializeField] private Material m_fireMaterial;
         [SerializeField] private Material m_iceMaterial;
         [SerializeField] private Material m_poisonMaterial;
-        
+
+        [SerializeField] private NavMeshAgent m_meshAgentSpeed;
+
         public bool m_isElemental;
         
         public MinionUI m_minionUI;
@@ -37,11 +41,10 @@ namespace TowerDefense
         public MinionType Type { get => m_type; set => m_type = value; }
         public ElementType Element { get => m_element; set => m_element = value; }
 
-        [SerializeField] private MeshRenderer m_renderer;
 
-        
         private void Start()
         {
+            
             SetRandomElement();
             m_minionUI.SetHealth(m_health, Element);
         }
@@ -99,6 +102,10 @@ namespace TowerDefense
             transform.position = new Vector3(50, 50, 50);
         }
 
+        public void SetSpeed(float speed)
+        {
+            m_meshAgentSpeed.speed = speed;
+        }
         public void Spawn()
         {
             onSpawn?.Invoke(this);

@@ -17,7 +17,7 @@ MonoBehaviour:
   infinityWave: 0
   isElementalZombie: 0
   healthZombie: 100
-  moveZombie: 0
+  moveZombie: 3.1
   damageZombie: 0
   ScoreZombie: 15
   isElementalSpider: 0

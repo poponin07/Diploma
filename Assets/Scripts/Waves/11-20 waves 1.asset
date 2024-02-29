@@ -15,14 +15,15 @@ MonoBehaviour:
   minioms:
   - {fileID: 1750036454947828, guid: 2869f50f08793594889040a0ec4b691e, type: 3}
   - {fileID: 5128811620208064792, guid: e42dce10de392fb46b7cf553d7658cf4, type: 3}
+  infinityWave: 0
   isElementalZombie: 1
   healthZombie: 200
-  moveZombie: 0
+  moveZombie: 3.1
   damageZombie: 0
   ScoreZombie: 25
   isElementalSpider: 0
   healthSpider: 400
-  moveSpider: 0
+  moveSpider: 3.1
   damageSpider: 0
   ScoreSpider: 45
   isElementalOrc: 0

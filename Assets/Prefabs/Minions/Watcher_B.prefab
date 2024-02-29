@@ -724,13 +724,14 @@ MonoBehaviour:
   m_score: 0
   m_element: 0
   m_type: 3
+  m_renderer: {fileID: 24900615006878331}
   m_commonMaterial: {fileID: 2100000, guid: ca79fe4e20212bc4cbfc3ce48271b184, type: 2}
   m_fireMaterial: {fileID: 2100000, guid: 7516c15b733371049a9e2e87348e8019, type: 2}
   m_iceMaterial: {fileID: 2100000, guid: b7e4401ba7b43cd48988f67bfe9eeba6, type: 2}
   m_poisonMaterial: {fileID: 2100000, guid: 8a3609ccb04039f4a8f7e5c79e7756af, type: 2}
+  m_meshAgentSpeed: {fileID: 8894632614656596658}
   m_isElemental: 1
   m_minionUI: {fileID: 7163792439258492365}
-  m_renderer: {fileID: 24900615006878331}
 --- !u!114 &7072425805974244373
 MonoBehaviour:
   m_ObjectHideFlags: 0

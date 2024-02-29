@@ -1258,18 +1258,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 100
-  m_speed: 0
+  m_speed: 1
   m_damage: 0
   m_score: 15
   m_element: 0
   m_type: 1
+  m_renderer: {fileID: 168025331}
   m_commonMaterial: {fileID: 2100000, guid: ca79fe4e20212bc4cbfc3ce48271b184, type: 2}
   m_fireMaterial: {fileID: 2100000, guid: 7516c15b733371049a9e2e87348e8019, type: 2}
   m_iceMaterial: {fileID: 2100000, guid: b7e4401ba7b43cd48988f67bfe9eeba6, type: 2}
   m_poisonMaterial: {fileID: 2100000, guid: 8a3609ccb04039f4a8f7e5c79e7756af, type: 2}
+  m_meshAgentSpeed: {fileID: 588174978}
   m_isElemental: 0
   m_minionUI: {fileID: 3964402321058422476}
-  m_renderer: {fileID: 168025331}
 --- !u!114 &3964402321058422476
 MonoBehaviour:
   m_ObjectHideFlags: 0

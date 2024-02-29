@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class BombAbility : BaseAbility
     [SerializeField] private SkinnedMeshRenderer m_renderer;
     [SerializeField] private GameObject m_zone;
     private BoxCollider m_collider;
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Minion"))

@@ -18,12 +18,12 @@ public class BaseAbility : MonoBehaviour
 
     public void StartTimer(TextMeshProUGUI textMeshProUGUI, Button button)
     {
-        //gameObject.GetComponent<BoxCollider>().enabled = true;
         m_textMeshProUGUI = textMeshProUGUI;
         m_textMeshProUGUI.enabled = true;
         m_button = button;
         m_enabled = true;
         m_button.interactable = false;
+        isBuild();
         m_cooldownTimeStamp = m_coolDown;
     }
 
@@ -37,6 +37,7 @@ public class BaseAbility : MonoBehaviour
             {
                 m_textMeshProUGUI.text = Mathf.Round(m_cooldownTimeStamp).ToString();
             }
+            
             else
             {
                 m_button.interactable = true;
@@ -45,5 +46,9 @@ public class BaseAbility : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    protected virtual void isBuild()
+    {
     }
 }
