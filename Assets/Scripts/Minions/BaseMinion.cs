@@ -94,11 +94,10 @@ namespace TowerDefense
         {
             if (!isBase)
             {
-                onDied?.Invoke(this);
                 onScore?.Invoke(Score); 
             }
-            
-            onDied.Invoke(this);
+
+            onDied?.Invoke(this);
             transform.position = new Vector3(50, 50, 50);
         }
 
@@ -109,11 +108,12 @@ namespace TowerDefense
         public void Spawn()
         {
             onSpawn?.Invoke(this);
+            gameObject.SetActive(true);
         }
 
         public void OnGetFromPool()
         {
-            gameObject.SetActive(false);
+            
         }
 
         public void OnRelease()

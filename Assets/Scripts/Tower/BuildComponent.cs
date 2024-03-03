@@ -46,7 +46,8 @@ namespace TowerDefense
             int towerPrice = towerComponent.Price;
             if (!m_playerData.CheckCoins(towerPrice))
             {
-                Destroy(newTower); 
+                Destroy(newTower);
+                m_isBuilding = false;
                 return;
             }
             StartCoroutine(TowerMagnetToCursor(newTower));

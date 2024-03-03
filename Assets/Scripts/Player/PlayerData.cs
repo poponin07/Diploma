@@ -7,13 +7,12 @@ namespace TowerDefense
     {
         [SerializeField] private ScoreComponent m_scoreComponent;
         [SerializeField] private UICoinComponent m_coinComponent;
+        [SerializeField]private int m_coin;
         private int m_score;
-        private int m_coin;
-
 
         private void Start()
         {
-            m_coin = 350;
+            m_coin = 300;
             m_coinComponent.UpdateUICoin(m_coin);
         }
 

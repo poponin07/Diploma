@@ -13,10 +13,9 @@ public class TowerComponent : MonoBehaviour
    [SerializeField] private float m_range;
    [SerializeField] private ElementType m_type;
 
-   public bool isBuilt = false;
+   public bool isBuilt ;
 
    private ShootComponent m_shootComponent;
-   //[SerializeField] private SphereCollider m_sphereColliderRange;
 
    public UIUpgradeWindow uiUpgradeWindow;
    public UpgradeTowerComponent upgradeTowerComponent;

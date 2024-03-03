@@ -77,9 +77,9 @@ public class AbilityComponent : MonoBehaviour
         yield return null;
     }
     
-    public void Heal()
+    public void Heal(int price)
     {
-        if (m_playerData.CheckCoins(500))
+        if (m_playerData.CheckCoins(price))
         {
             m_baseComponent.AddHeath(5);
         }

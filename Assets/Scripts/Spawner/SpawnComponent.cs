@@ -24,7 +24,7 @@ namespace TowerDefense
 
         private float m_spawnOffset;
         private int m_currentWave;
-        private DynamicPool.DynamicPool m_dynamicPool = new DynamicPool.DynamicPool();
+        private global::DynamicPool.DynamicPool m_dynamicPool = new global::DynamicPool.DynamicPool();
 
         private Dictionary<MinionType, int> m_typeMultipliers = new Dictionary<MinionType, int>()
         {
@@ -64,7 +64,7 @@ namespace TowerDefense
         {
             m_waveManager.SetMinionParametersByWave(minion);
             MinoinMoveController moveComponent = minion.gameObject.GetComponent<MinoinMoveController>();
-
+       
             moveComponent.SetRunIndex(-1);
             moveComponent.SetTarget();
             

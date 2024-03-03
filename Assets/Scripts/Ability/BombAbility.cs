@@ -9,7 +9,12 @@ public class BombAbility : BaseAbility
     [SerializeField] private SkinnedMeshRenderer m_renderer;
     [SerializeField] private GameObject m_zone;
     private BoxCollider m_collider;
-    
+
+    private void Start()
+    {
+        m_collider = gameObject.GetComponent<BoxCollider>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Minion"))
@@ -18,6 +23,11 @@ public class BombAbility : BaseAbility
             gameObject.GetComponent<BoxCollider>().enabled =  false;
             StartCoroutine(ExplosionCor());
         }
+    }
+    
+    protected override void isBuild()
+    {
+        m_collider.enabled = true;
     }
 
     IEnumerator ExplosionCor()

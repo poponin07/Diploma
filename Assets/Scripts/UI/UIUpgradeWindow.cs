@@ -33,9 +33,9 @@ public class UIUpgradeWindow : MonoBehaviour
    
    public void SetParams(float damage, float attackSpeed, float range)
    {
-      m_damageParamsText.text = damage.ToString() + " + 25";
-      m_attackParamsPriceText.text = attackSpeed.ToString() + " + 0.1";
-      m_rangeParamsText.text = range.ToString() + " + 0.3";
+      m_damageParamsText.text =  string.Format("{0:F0}", damage) + " + 25";
+      m_attackParamsPriceText.text = string.Format("{0:F1}", attackSpeed) + " - 0.1";
+      m_rangeParamsText.text = string.Format("{0:F1}", range) + " + 0.3";
    }
    
    public void Hide()

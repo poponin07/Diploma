@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using TowerDefense;
+using TowerDefense.DynamicPool;
 
-namespace TowerDefense.DynamicPool
+namespace DynamicPool
 {
     public class DynamicPool : IDynamicPool
     {
-        private Dictionary<MinionType, Stack<IPooledObject>> m_allPools = new Dictionary<MinionType, Stack<IPooledObject>>();
-
+        private Dictionary<MinionType, Stack<IPooledObject>> m_allPools = new ();
         public IPooledObject GetFromPool(MinionType type, Func<IPooledObject> createMethod)
         {
             var targetPool = GetPoolOfType(type);
@@ -16,7 +17,7 @@ namespace TowerDefense.DynamicPool
                 return result;
             }
        
-            var pooledObject = createMethod();
+            IPooledObject pooledObject = createMethod();
             pooledObject.OnGetFromPool();
             return pooledObject;
         }
