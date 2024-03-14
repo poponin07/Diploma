@@ -8415,6 +8415,7 @@ MonoBehaviour:
     type: 3}
   m_playerData: {fileID: 963194232}
   m_camera: {fileID: 963194227}
+  m_baseComponent: {fileID: 981892354}
 --- !u!1 &770431407
 GameObject:
   m_ObjectHideFlags: 0
@@ -10751,6 +10752,7 @@ MonoBehaviour:
   m_uiBaseComponent: {fileID: 981892353}
   m_scoreComponent: {fileID: 253398135}
   m_gameOverPanel: {fileID: 1983693547}
+  m_gameUIRoot: {fileID: 247171064}
 --- !u!65 &981892355
 BoxCollider:
   m_ObjectHideFlags: 0

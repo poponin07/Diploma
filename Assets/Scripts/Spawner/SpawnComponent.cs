@@ -21,6 +21,7 @@ namespace TowerDefense
         [SerializeField] private OrcComponent m_orcTemplate;
         [SerializeField] private PlayerData m_playerData;
         [SerializeField] private Camera m_camera;
+        [SerializeField] private BaseComponent m_baseComponent;
 
         private float m_spawnOffset;
         private int m_currentWave;
@@ -45,6 +46,11 @@ namespace TowerDefense
         
         public void StartSpawn(List<MinionType> minions)
         {
+            if (m_baseComponent.GetHeath() == 0)
+            {
+                m_baseComponent.ShowGameOverPanel();
+                return;
+            }
             m_currentWave++;
             var waveDesc = CreateWaveDesc(minions);
             var waveEnemies = GetWaveEnemies(waveDesc);
@@ -71,6 +77,7 @@ namespace TowerDefense
             minion.transform.position = m_spawnPointTransform.position;
             moveComponent.m_points = m_path;
             minion.m_minionUI.SetHealth(minion.Health, minion.Element);
+            minion.SetSpeed(3.1f);
             minion.gameObject.SetActive(true);
             minion.Spawn();
         }
